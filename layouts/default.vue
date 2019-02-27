@@ -48,7 +48,7 @@
             </v-list-tile-content>
           </v-list-tile>
           <v-subheader>Customizations</v-subheader>
-          <v-list-tile @click="darkTheme = !darkTheme">
+          <v-list-tile>
             <v-list-tile-action>
               <v-switch v-model="darkTheme" color="primary" />
             </v-list-tile-action>
