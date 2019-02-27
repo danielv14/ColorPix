@@ -2,7 +2,6 @@
   <v-app :dark="darkTheme">
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
