@@ -1,14 +1,5 @@
-require('es6-promise').polyfill()
-require('isomorphic-fetch')
-const { toJson } = require('unsplash-js')
-
-const Unsplash = require('unsplash-js').default
-require('dotenv').config()
-
-const unsplash = new Unsplash({
-  applicationId: process.env.UNSPLASH_ACCESS_KEY,
-  secret: process.env.UNSPLASH_SECRET_KEY
-})
+const { unsplashWrapper } = require('../utils')
+const { unsplash, toJson } = unsplashWrapper
 
 const fetchRandomImage = async () => {
   try {
