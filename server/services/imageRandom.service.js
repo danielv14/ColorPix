@@ -1,6 +1,11 @@
 const { unsplashWrapper } = require('../utils')
 const { unsplash, toJson } = unsplashWrapper
 
+/**
+ * Fetch a random image from unsplash
+ *
+ * @returns {Promise}
+ */
 const fetchRandomImage = async () => {
   try {
     const response = await unsplash.photos.getRandomPhoto()

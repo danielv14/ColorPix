@@ -7,6 +7,8 @@ const { unsplash, toJson } = unsplashWrapper
  * @param {String} param0.keyword Keyword to search for
  * @param {Number=} [param0.page=1] Target specific page in the search result
  * @param {Number=} [param0.perPage=10] Size of each search result page
+ *
+ * @returns {Promise}
  */
 const imagesSearch = async ({ keyword, page = 1, perPage = 10 }) => {
   try {
