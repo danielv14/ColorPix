@@ -1,7 +1,7 @@
-const randomImageService = require('./randomImage.service')
+const imageRandomService = require('./imageRandom.service')
 const imagesSearchService = require('./imagesSearch.service')
 
 module.exports = {
-  randomImageService,
+  imageRandomService,
   imagesSearchService
 }
