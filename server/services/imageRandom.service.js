@@ -9,7 +9,9 @@ const { unsplash, toJson } = unsplashWrapper
 const fetchRandomImage = async () => {
   try {
     const response = await unsplash.photos.getRandomPhoto()
-    return await toJson(response)
+    const responseJson = await toJson(response)
+
+    return responseJson
   } catch (e) {
     throw new Error(e.message)
   }
