@@ -25,7 +25,7 @@ class ImagePalette extends Image {
     if (!url) {
       return []
     }
-    const vibrantPalette = await Vibrant.from(url).getPalette()
+    const vibrantPalette = await this._getPalette()
     const colors = Object.keys(vibrantPalette).map(swatch =>
       vibrantPalette[swatch].getHex()
     )
@@ -37,11 +37,19 @@ class ImagePalette extends Image {
    * @returns {Chroma[]}
    */
   async getChromaColors() {
-    const vibrantPalette = await Vibrant.from(this.getImageThumb()).getPalette()
+    const vibrantPalette = await this._getPalette()
     const colors = Object.keys(vibrantPalette).map(swatch =>
       chroma(vibrantPalette[swatch].getHex())
     )
     return colors
+  }
+
+  /**
+   * Get a palette from image via Promise
+   * @returns {Promise}
+   */
+  _getPalette() {
+    return Vibrant.from(this.getImageThumb()).getPalette()
   }
 }
 
