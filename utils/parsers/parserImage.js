@@ -1,4 +1,5 @@
 import ImagePalette from '../ImagePalette'
+
 /**
  *  Parse image response data as ImagePalette class
  * @param {Object} data
