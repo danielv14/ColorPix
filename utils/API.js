@@ -50,6 +50,30 @@ class API {
   }
 
   /**
+   * Get a single page from the list of all photos
+   * @param {Object} param0
+   * @param {Number=} param0.page List result page to get
+   * @param {Number=} param0.perPage List size to get
+   * @param {String=} param0.orderBy Set ordering of list. Accepts 'latest', 'oldest' and 'popular'
+   * @returns {Promise}
+   */
+  getImagesList({ page, perPage, orderBy } = {}) {
+    // Validate sort order
+    const sortOrder = ['popular', 'latest', 'oldest'].includes(orderBy)
+      ? orderBy
+      : 'latest'
+
+    const config = {
+      params: {
+        page,
+        perPage,
+        orderBy: sortOrder
+      },
+      transformResponse: this._useParsers(parserImages)
+    }
+    return this.request(this._url('images/list'), config)
+  }
+  /**
    * Return api endpoint with base endpoint prefixed
    * @param {String} url
    * @returns {String}
