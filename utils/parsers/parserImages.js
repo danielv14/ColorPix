@@ -7,7 +7,7 @@ import ImagePalette from '../ImagePalette'
  */
 export default function parserImage(data) {
   if (!data) {
-    return {}
+    return []
   }
 
   const localData = Object.assign({}, data)
