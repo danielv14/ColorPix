@@ -1,4 +1,5 @@
 import data from '../testdata/images'
+import dataList from '../testdata/imageList'
 import parserImages from './parserImages'
 
 describe('parserImages', () => {
@@ -17,5 +18,12 @@ describe('parserImages', () => {
     const images = parserImages(data)
     const image = images[0]
     methods.map(method => expect(image[method]).toBeDefined())
+  })
+
+  it('should handle parsing an array response format', () => {
+    const images = parserImages(dataList)
+    const image = images[0]
+    expect(images.length).toEqual(dataList.length)
+    expect(image.id).toEqual(dataList[0].id)
   })
 })

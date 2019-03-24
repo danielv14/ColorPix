@@ -7,9 +7,24 @@ import ImagePalette from '../ImagePalette'
  */
 export default function parserImage(data) {
   if (!data) {
-    return {}
+    return []
   }
+
   const localData = Object.assign({}, data)
-  const imagePalettes = localData.results.map(image => new ImagePalette(image))
+  const images = localData.results
+    ? localData.results
+    : createImageArray(localData)
+
+  const imagePalettes = images.map(image => new ImagePalette(image))
   return imagePalettes
+}
+
+/**
+ * Loop over object and to create an array of the objects
+ * @param {Object} objects
+ *
+ * @returns {Array[Object]}
+ */
+function createImageArray(objects) {
+  return Object.keys(objects).map(dataKey => objects[dataKey])
 }
