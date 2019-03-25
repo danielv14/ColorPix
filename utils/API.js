@@ -73,6 +73,28 @@ class API {
     }
     return this.request(this._url('images/list'), config)
   }
+
+  /**
+   * Get latest images in a list
+   * @param {Object} param0
+   * @param {Number=} [param0.page=1] Result page to get
+   * @param {Number=} [param0.perPage=10] Result size to get
+   * @returns {Promise}
+   */
+  getImagesLatest({ page = 1, perPage = 10 } = {}) {
+    return this.getImagesList({ page, perPage, orderBy: 'latest' })
+  }
+
+  /**
+   * Get popular images in a list
+   * @param {Object} param0
+   * @param {Number=} [param0.page=1] Result page to get
+   * @param {Number=} [param0.perPage=10] Result size to get
+   * @returns {Promise}
+   */
+  getImagesPopular({ page = 1, perPage = 10 } = {}) {
+    return this.getImagesList({ page, perPage, orderBy: 'popular' })
+  }
   /**
    * Return api endpoint with base endpoint prefixed
    * @param {String} url
