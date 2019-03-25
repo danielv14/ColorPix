@@ -1,11 +1,11 @@
-import ImagePalette from '../ImagePalette'
+import parserImage from './parserImage'
 
 /**
- * Parse images response data as ImagePalette classes
+ * Parse images response data. Uses parserImage method to parse multiple images as ImagePalette classes
  * @param {Object} data
  * @returns {Array[ImagePalette]}
  */
-export default function parserImage(data) {
+export default function parserImages(data) {
   if (!data) {
     return []
   }
@@ -15,7 +15,7 @@ export default function parserImage(data) {
     ? localData.results
     : createImageArray(localData)
 
-  const imagePalettes = images.map(image => new ImagePalette(image))
+  const imagePalettes = images.map(image => parserImage(image))
   return imagePalettes
 }
 
