@@ -32,7 +32,7 @@ class API {
    * @param {String} param0.keyword keyword to search by
    * @param {Number} param0.page search result page to get
    * @param {Number} param0.perPage determine size of search result to get at the time
-   * @returns {Promise}
+   * @returns {Promise[ImagePalette]}
    */
   getImagesByKeyword({ keyword, page, perPage }) {
     if (!keyword) {
@@ -55,7 +55,7 @@ class API {
    * @param {Number=} param0.page List result page to get
    * @param {Number=} param0.perPage List size to get
    * @param {String=} param0.orderBy Set ordering of list. Accepts 'latest', 'oldest' and 'popular'
-   * @returns {Promise}
+   * @returns {Promise[ImagePalette]}
    */
   getImagesList({ page, perPage, orderBy } = {}) {
     // Validate sort order
@@ -79,7 +79,7 @@ class API {
    * @param {Object} param0
    * @param {Number=} [param0.page=1] Result page to get
    * @param {Number=} [param0.perPage=10] Result size to get
-   * @returns {Promise}
+   * @returns {Promise[ImagePalette]}
    */
   getImagesLatest({ page = 1, perPage = 10 } = {}) {
     return this.getImagesList({ page, perPage, orderBy: 'latest' })
@@ -90,10 +90,21 @@ class API {
    * @param {Object} param0
    * @param {Number=} [param0.page=1] Result page to get
    * @param {Number=} [param0.perPage=10] Result size to get
-   * @returns {Promise}
+   * @returns {Promise[ImagePalette]}
    */
   getImagesPopular({ page = 1, perPage = 10 } = {}) {
     return this.getImagesList({ page, perPage, orderBy: 'popular' })
+  }
+
+  /**
+   * Get a mock response of image list with 10 images
+   * @returns {Promise[ImagePalette]}
+   */
+  getMockDataImageList() {
+    const config = {
+      transformResponse: this._useParsers(parserImages)
+    }
+    return this.request(this._url('/mock/list'), config)
   }
   /**
    * Return api endpoint with base endpoint prefixed
