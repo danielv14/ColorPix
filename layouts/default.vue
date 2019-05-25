@@ -2,7 +2,7 @@
   <v-app :dark="darkTheme">
     <core-navigation-drawer />
     <v-content>
-      <v-container>
+      <v-container fluid>
         <nuxt />
       </v-container>
     </v-content>
