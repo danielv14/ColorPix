@@ -8,7 +8,7 @@ const { fetchImageList } = imageListService
  * @param {Object} res
  * @param {Function} next
  */
-const getImageList = async (req, res, next) => {
+exports.getImageList = async (req, res, next) => {
   try {
     const { page, perPage, orderBy } = req.query
     const imageList = await fetchImageList({
@@ -21,8 +21,4 @@ const getImageList = async (req, res, next) => {
   } catch (e) {
     res.sendStatus(500) && next(e)
   }
-}
-
-module.exports = {
-  getImageList
 }
