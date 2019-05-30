@@ -1,20 +1,18 @@
 const express = require('express')
 const {
-  getImageRandom,
-  getImagesByKeyword,
-  getImageList
+  imageListController,
+  imageRandomController,
+  imagesSearchController,
+  mockDataController
 } = require('../controllers')
-
-// Require methods from mockData controller seperatly since controllers index does not require and export it
-const { getMockImageList } = require('../controllers/mockData.controller')
 
 const router = express.Router()
 
-router.get('/image/random', getImageRandom)
-router.get('/images/search', getImagesByKeyword)
-router.get('/images/list', getImageList)
+router.get('/image/random', imageRandomController.getImageRandom)
+router.get('/images/search', imagesSearchController.getImagesByKeyword)
+router.get('/images/list', imageListController.getImageList)
 
 // Setup mock route for image list response
-router.get('/mock/list', getMockImageList)
+router.get('/mock/list', mockDataController.getMockImageList)
 
 module.exports = router

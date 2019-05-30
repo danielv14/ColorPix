@@ -7,15 +7,11 @@ const { mockDataImageList } = mockDataService
  * @param {Object} res
  * @param {Function} next
  */
-const getMockImageList = (req, res, next) => {
+exports.getMockImageList = (req, res, next) => {
   try {
     const data = mockDataImageList()
     res.send(data)
   } catch (e) {
     res.sendStatus(500) && next(e)
   }
-}
-
-module.exports = {
-  getMockImageList
 }

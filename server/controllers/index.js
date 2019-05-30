@@ -1,9 +1,11 @@
-const { getImageRandom } = require('./imageRandom.controller')
-const { getImagesByKeyword } = require('./imagesSearch.controller')
-const { getImageList } = require('./imageList.controller')
+const imageRandomController = require('./imageRandom.controller')
+const imageListController = require('./imageList.controller')
+const imagesSearchController = require('./imagesSearch.controller')
+const mockDataController = require('./mockData.controller')
 
 module.exports = {
-  getImageRandom,
-  getImagesByKeyword,
-  getImageList
+  imageRandomController,
+  imageListController,
+  imagesSearchController,
+  mockDataController
 }

@@ -8,7 +8,7 @@ const { imagesSearch } = imagesSearchService
  * @param {Object} res
  * @param {Function} next
  */
-const getImagesByKeyword = async (req, res, next) => {
+exports.getImagesByKeyword = async (req, res, next) => {
   try {
     const { keyword, page, perPage } = req.query
     res.send(
@@ -22,8 +22,4 @@ const getImagesByKeyword = async (req, res, next) => {
   } catch (e) {
     res.sendStatus(500) && next(e)
   }
-}
-
-module.exports = {
-  getImagesByKeyword
 }
