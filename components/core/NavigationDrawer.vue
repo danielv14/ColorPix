@@ -45,7 +45,7 @@ export default {
     return {
       clipped: true,
       drawer: false,
-      temporary: true,
+      temporary: false,
       darkTheme: false,
       title: 'Color Splash',
       items: [
