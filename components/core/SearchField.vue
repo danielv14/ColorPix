@@ -5,6 +5,9 @@
     single-line
     append-icon="search"
     class="searchbar"
+    hide-details
+    box
+    full-width
     @click:append="search"
     @keyup.enter="search"
   />
@@ -29,7 +32,6 @@ export default {
 </script>
 
 <style lang="stylus">
-.searchbar .v-input__slot
-  margin-bottom: 0px
+
 
 </style>
