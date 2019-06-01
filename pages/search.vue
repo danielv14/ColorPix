@@ -13,7 +13,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout align-center justify-center>
+    <v-layout v-if="hasImages" align-center justify-center>
       <image-fetch-button :loading="loadingImages" @fetch="loadMore" />
     </v-layout>
   </div>
@@ -30,6 +30,9 @@ export default {
   computed: {
     keyword() {
       return this.$route.query.keyword
+    },
+    hasImages() {
+      return this.images.length > 0
     }
   },
   watch: {
