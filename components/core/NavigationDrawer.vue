@@ -32,6 +32,8 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <core-search-field />
+      <v-spacer />
       <core-menu-settings />
     </v-toolbar>
   </div>
@@ -43,7 +45,7 @@ export default {
     return {
       clipped: true,
       drawer: false,
-      temporary: true,
+      temporary: false,
       darkTheme: false,
       title: 'Color Splash',
       items: [
