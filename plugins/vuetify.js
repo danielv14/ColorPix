@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import colors from 'vuetify/es5/util/colors'
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
 Vue.use(Vuetify, {
+  iconfont: 'mdi',
   theme: {
     primary: colors.pink.accent2,
     accent: colors.grey.darken3,
