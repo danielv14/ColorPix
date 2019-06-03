@@ -50,12 +50,17 @@ export default {
       title: 'Color Splash',
       items: [
         {
-          icon: 'apps',
+          icon: 'mdi-home',
           title: 'Home',
           to: '/'
         },
         {
-          icon: 'bubble_chart',
+          icon: 'mdi-fire',
+          title: 'Popular',
+          to: '/popular'
+        },
+        {
+          icon: 'mdi-information-outline',
           title: 'About',
           to: '/about'
         }
