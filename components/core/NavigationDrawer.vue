@@ -57,7 +57,12 @@ export default {
         {
           icon: 'mdi-fire',
           title: 'Popular',
-          to: '/popular'
+          to: { path: '/list', query: { orderBy: 'popular' } }
+        },
+        {
+          icon: 'mdi-clock-outline',
+          title: 'Latest',
+          to: { path: '/list', query: { orderBy: 'latest' } }
         },
         {
           icon: 'mdi-information-outline',
