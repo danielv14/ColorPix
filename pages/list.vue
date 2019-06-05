@@ -28,26 +28,43 @@ export default {
     }
   },
   computed: {
+    orderBy() {
+      return this.$route.query.orderBy
+    },
+    pageTitle() {
+      return this.orderBy.charAt(0).toUpperCase() + this.orderBy.slice(1)
+    },
     hasImages() {
       return this.images.length > 0
     }
   },
+  watch: {
+    async $route(to, from) {
+      const orderBy = to.query.orderBy
+      this.images = await this.getImagesList({ orderBy })
+    }
+  },
   async mounted() {
-    this.images = await this.getImages({
-      keyword: this.keyword
+    this.images = await this.getImagesList({
+      orderBy: this.orderBy
     })
   },
   methods: {
-    async getImages({ page = 1, perPage }) {
+    async getImagesList({ page = 1, perPage, orderBy }) {
       // TODO: Use real api request for fetching images by keyword
-      const { data } = await this.$api.getMockDataImageList()
+      const { data } = await this.$api.getMockDataImageList({
+        page,
+        perPage,
+        orderBy
+      })
       return data
     },
     async loadMore({ page, perPage }) {
       this.loadingImages = true
-      const newImages = await this.getImages({
+      const newImages = await this.getImagesList({
         page,
-        perPage
+        perPage,
+        orderBy: this.orderBy
       })
       this.images.push(...newImages)
       this.loadingImages = false
