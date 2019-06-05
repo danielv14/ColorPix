@@ -65,7 +65,7 @@ export default {
           to: { path: '/list', query: { orderBy: 'latest' } }
         },
         {
-          icon: 'mdi-information-outline',
+          icon: 'mdi-information-variant',
           title: 'About',
           to: '/about'
         }
