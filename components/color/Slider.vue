@@ -60,12 +60,6 @@ export default {
     hexValues() {
       return this.colors.map(color => color[this.type](this.sliderLevel).hex())
     }
-  },
-  methods: {
-    copyToClipboard() {
-      // eslint-disable-next-line no-console
-      console.log('Copy')
-    }
   }
 }
 </script>
