@@ -47,7 +47,7 @@ export default {
       drawer: false,
       temporary: false,
       darkTheme: false,
-      title: 'Color Splash',
+      title: 'ColorPix',
       items: [
         {
           icon: 'mdi-home',
@@ -75,5 +75,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
 </style>
