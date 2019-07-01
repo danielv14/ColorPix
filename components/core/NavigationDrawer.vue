@@ -34,7 +34,7 @@
       <v-spacer />
       <core-search-field />
       <v-spacer />
-      <core-menu-settings />
+      <!-- <core-menu-settings /> -->
     </v-toolbar>
   </div>
 </template>
