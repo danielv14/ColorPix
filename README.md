@@ -1,4 +1,4 @@
-# color-splash
+# ColorPix
 
 > Nuxt.js app to help users find inspiration from color palettes created via images from Unsplash
 

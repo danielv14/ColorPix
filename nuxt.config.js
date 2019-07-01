@@ -8,7 +8,10 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: pkg.name
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(''),
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -37,7 +40,11 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/vuetify'],
+  plugins: [
+    '@/plugins/vuetify',
+    '@/plugins/api',
+    '@/plugins/componentRegistration'
+  ],
 
   /*
   ** Nuxt.js modules
@@ -70,6 +77,8 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      config.output.globalObject = 'this'
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
@@ -77,6 +86,13 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
+        })
+      }
+      if (ctx.isClient) {
+        // web workers are only available client-side
+        config.module.rules.push({
+          test: /\.worker\.js$/, // this will pick up all .js files that ends with ".worker.js"
+          loader: 'worker-loader'
         })
       }
     }
