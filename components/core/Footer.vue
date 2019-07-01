@@ -3,7 +3,7 @@
     :fixed="fixedFooter"
     app
   >
-    <span>&copy; 2019</span>
+    <span class="pl-2">&copy; {{ getYear() }}</span>
   </v-footer>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   data() {
     return {
       fixedFooter: true
+    }
+  },
+  methods: {
+    getYear() {
+      return new Date().getFullYear()
     }
   }
 }
