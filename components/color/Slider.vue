@@ -1,15 +1,17 @@
 <template>
   <div>
     <color-boxes :colors="hexValues" size="45px" :hover-effect="hoverEffect" />
-    <v-slider
-      v-model="sliderLevel"
-      :label="label"
-      :max="max"
-      :min="min"
-      thumb-label
-      :ticks="ticks"
-      append-icon="copy"
-    />
+    <v-layout align-baseline>
+      <v-slider
+        v-model="sliderLevel"
+        :label="label"
+        :max="max"
+        :min="min"
+        thumb-label
+        :ticks="ticks"
+      />
+      <color-clipboard-copy :colors="hexValues" />
+    </v-layout>
   </div>
 </template>
 
@@ -57,6 +59,12 @@ export default {
   computed: {
     hexValues() {
       return this.colors.map(color => color[this.type](this.sliderLevel).hex())
+    }
+  },
+  methods: {
+    copyToClipboard() {
+      // eslint-disable-next-line no-console
+      console.log('Copy')
     }
   }
 }
