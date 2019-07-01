@@ -49,7 +49,11 @@ export default {
   methods: {
     async getImagesByKeyword({ keyword, page = 1, perPage }) {
       // TODO: Use real api request for fetching images by keyword
-      const { data } = await this.$api.getMockDataImageList()
+      const { data } = await this.$api.getImagesByKeyword({
+        keyword,
+        page,
+        perPage
+      })
       return data
     },
     async loadMore({ page, perPage }) {

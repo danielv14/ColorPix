@@ -18,13 +18,13 @@
         </v-flex>
       </v-layout>
       <v-layout v-if="imagesPopular" align-center justify-center>
-        <image-fetch-button text="Show more" :loading="loadingImages" @fetch="goTo('popular')" />
+        <image-fetch-button text="Show more" @fetch="goTo('popular')" />
       </v-layout>
     </div>
     <div v-if="imagesLatest">
       <h2 class="pl-4">
         <v-icon class="gray lighten-2">
-          mdi-history
+          mdi-clock-outline
         </v-icon>
         Latest
       </h2>
@@ -41,7 +41,7 @@
         </v-flex>
       </v-layout>
       <v-layout v-if="imagesLatest" align-center justify-center>
-        <image-fetch-button text="Show more" :loading="loadingImages" @fetch="goTo('latest')" />
+        <image-fetch-button text="Show more" @fetch="goTo('latest')" />
       </v-layout>
     </div>
   </v-container>
