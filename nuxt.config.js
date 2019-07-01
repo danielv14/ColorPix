@@ -52,13 +52,19 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: process.env.NODE_ENV === 'production'
+  },
+
+  proxy: {
+    '/api/': 'https://colorpix.herokuapp.com/api/'
   },
 
   /*
