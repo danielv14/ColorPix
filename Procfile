@@ -1,1 +1,1 @@
-web: nuxt start
+web: node server/index.js
