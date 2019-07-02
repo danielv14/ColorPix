@@ -64,10 +64,6 @@ module.exports = {
     proxy: process.env.NODE_ENV === 'production'
   },
 
-  proxy: {
-    '/api/': 'https://colorpix.herokuapp.com/api/'
-  },
-
   /*
   ** Build configuration
   */
