@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout>
-      <v-flex sm12>
+    <v-layout wrap row>
+      <v-flex class="px-2" sm12 lg6>
         <h1 class="display-1">
           What is
           <span class="primary--text">
@@ -12,7 +12,7 @@
           ColorPix is a image based website that helps users find inspiration from color palettes created via images from Unsplash!
         </p>
       </v-flex>
-      <v-flex sm12>
+      <v-flex class="px-2" sm12 lg6>
         <h2 class="display-1">
           <span class="primary--text">
             How
