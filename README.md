@@ -20,3 +20,11 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## Deployment
+
+Application is using heroku for deployment and the project master branch is the target branch to deploy to the 
+```bash
+# Deploy to heroku
+$ git push heroku master
+```
