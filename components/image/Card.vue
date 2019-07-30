@@ -1,10 +1,6 @@
 <template>
   <v-hover>
-    <v-card
-      slot-scope="{ hover }"
-      :class="`elevation-${hover ? 18 : 0}`"
-      class="elevation-0"
-    >
+    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 18 : 0}`" class="elevation-0">
       <v-img
         :src="image.getImageRegular()"
         :height="imageHeight"
@@ -12,7 +8,7 @@
       />
       <color-boxes :colors="hexValues" />
       <v-card-actions>
-        <image-attribute-link :user="image.getUserInfo()" />        
+        <image-attribute-link :user="image.getUserInfo()" />
         <v-spacer />
         <v-btn icon @click="showContent = !showContent">
           <v-icon>{{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
@@ -20,7 +16,18 @@
       </v-card-actions>
       <v-slide-y-transition>
         <v-card-text v-show="showContent">
-          <color-tabs :colors="colors" :tabs="tabs" :color-manipulation="colorManipulation" />
+          <color-slider
+            :colors="colors"
+            label="Saturation"
+            type="saturation"
+            @change="onChangeSlider"
+          />
+          <color-slider
+            :colors="colors"
+            label="Brightness"
+            type="brightness"
+            @change="onChangeSlider"
+          />
         </v-card-text>
       </v-slide-y-transition>
     </v-card>
@@ -28,6 +35,10 @@
 </template>
 
 <script>
+import {
+  getManipulationFromTypeAndThreshold,
+  getChangedHexValues
+} from '@@/utils/colorManipulation'
 export default {
   props: {
     image: {
@@ -43,31 +54,81 @@ export default {
     return {
       showContent: false,
       colors: [],
-      colorTab: null,
-      tabs: ['Saturation', 'Brightness'],
-      colorManipulation: [
-        [
-          { type: 'saturate', label: 'Saturate' },
-          { type: 'desaturate', label: 'Desaturate' }
-        ],
-        [
-          { type: 'brighten', label: 'Brighten' },
-          { type: 'darken', label: 'Darken' }
-        ]
-      ]
+      colorManipulation: {},
+      hexValues: []
     }
   },
   computed: {
     imageDescription() {
       return this.image.description || this.image.alt_description
-    },
-    hexValues() {
-      return this.colors.map(color => color.hex())
     }
   },
   async mounted() {
     const chromaColors = await this.image.getChromaColors()
     this.colors = [...chromaColors]
+    this.hexValues = this.colors.map(color => color.hex())
+  },
+  methods: {
+    /**
+     * @param {String} type
+     * @param {Number} level
+     */
+    async onChangeSlider({ type, level }) {
+      const manipulationMethod = getManipulationFromTypeAndThreshold({
+        threshold: level,
+        type: type
+      })
+      this.setManipulationType({ type, level, method: manipulationMethod })
+      this.hexValues = await this.getChangedHexValues()
+    },
+
+    /**
+     * Set manipulation type, level and method on the manipulations object
+     * @param {String} type
+     * @param {Number} level
+     * @param {String} method name to use on the chroma object
+     */
+    setManipulationType({ type, level, method }) {
+      // Cast level to positive number
+      const manipulationLevel = Math.abs(level)
+      // Set color manipulation for current type
+      this.colorManipulation[type] = {
+        type: method,
+        level: manipulationLevel
+      }
+    },
+
+    /**
+     * Get updated hex color array built from original image palette and color manipulations
+     * @returns {Array}
+     */
+    async getChangedHexValues() {
+      const chromaColors = await this.getChromaColors()
+      const manipulations = this.getManipulationsToUse()
+      return getChangedHexValues({ chromaColors, manipulations })
+    },
+
+    /**
+     * Get array of manipulation methods and levels to use
+     * @returns {Array}
+     */
+    getManipulationsToUse() {
+      const manipulations = Object.keys(this.colorManipulation).map(
+        manipulationKey => {
+          const manipulation = this.colorManipulation[manipulationKey]
+          return { type: manipulation.type, level: manipulation.level }
+        }
+      )
+      return manipulations
+    },
+    /**
+     * Get default chroma colors from image
+     * @returns {Array<Chroma>}
+     */
+    async getChromaColors() {
+      const chromaColors = await this.image.getChromaColors()
+      return [...chromaColors]
+    }
   }
 }
 </script>
