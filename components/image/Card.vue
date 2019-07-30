@@ -10,6 +10,8 @@
       <v-card-actions>
         <image-attribute-link :user="image.getUserInfo()" />
         <v-spacer />
+        <color-clipboard-copy :colors="hexValues" />
+
         <v-btn icon @click="showContent = !showContent">
           <v-icon>{{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
         </v-btn>
