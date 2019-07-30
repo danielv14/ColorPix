@@ -1,44 +1,45 @@
+
 <template>
   <div>
-    <color-boxes :colors="hexValues" size="45px" :hover-effect="hoverEffect" />
-    <v-layout align-baseline>
-      <v-slider
-        v-model="sliderLevel"
-        :label="label"
-        :max="max"
-        :min="min"
-        thumb-label
-        :ticks="ticks"
-      />
-      <color-clipboard-copy :colors="hexValues" />
-    </v-layout>
+    <v-slider
+      v-model="sliderLevel"
+      :label="label"
+      :max="max"
+      :min="min"
+      thumb-label
+      :ticks="ticks"
+      @input="onChange"
+      @start="onStart"
+    />
   </div>
 </template>
 
 <script>
+/* eslint-disable no-console */
+import { availableTypes } from '@@/utils/colorManipulation'
 export default {
   props: {
-    hoverEffect: {
-      type: Boolean,
-      default: () => false
-    },
-    colors: {
-      type: Array,
-      default: () => []
+    label: {
+      type: String,
+      default: () => ''
     },
     type: {
       type: String,
       default: () => ''
     },
-    label: {
-      type: String,
-      default: () => ''
+    colors: {
+      type: Array,
+      default: () => []
     },
     max: {
       type: Number,
       default: () => 6
     },
     min: {
+      type: Number,
+      default: () => -6
+    },
+    default: {
       type: Number,
       default: () => 0
     },
@@ -53,12 +54,31 @@ export default {
   },
   data() {
     return {
-      sliderLevel: this.min
+      sliderLevel: this.default,
+      prevLevel: this.default
     }
   },
-  computed: {
-    hexValues() {
-      return this.colors.map(color => color[this.type](this.sliderLevel).hex())
+  mounted() {
+    if (!this.type) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Prop 'type' is required. The following types are allowed: ${availableTypes().join(
+          ', '
+        )}`
+      )
+    }
+  },
+  methods: {
+    onChange(evt) {
+      this.$emit('change', {
+        level: evt,
+        type: this.type,
+        shouldIncrement: evt >= this.prevLevel
+      })
+      this.prevLevel = evt
+    },
+    onStart(evt) {
+      this.prevLevel = evt
     }
   }
 }
