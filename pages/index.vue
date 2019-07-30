@@ -59,11 +59,11 @@ export default {
   },
   methods: {
     async getLatestImages() {
-      const { data } = await this.$api.getImagesLatest({ perPage: 4 })
+      const { data } = await this.$api.getImagesLatest({ perPage: 6 })
       this.imagesLatest = data
     },
     async getPopularImages() {
-      const { data } = await this.$api.getImagesPopular({ perPage: 4 })
+      const { data } = await this.$api.getImagesPopular({ perPage: 6 })
       this.imagesPopular = data
     },
     goTo(route) {
