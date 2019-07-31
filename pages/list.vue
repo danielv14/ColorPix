@@ -3,7 +3,7 @@
     <v-layout align-start row wrap>
       <v-flex
         v-for="(image, index) in images"
-        :key="index + image.id"  
+        :key="index + image.id"
         xl4
         md6
         xs12
@@ -14,7 +14,7 @@
     </v-layout>
 
     <v-layout v-if="hasImages" align-center justify-center>
-      <image-fetch-button :loading="loadingImages" @fetch="loadMore" />
+      <image-fetch-button :loading="loadingImages" :lazy="true" @fetch="loadMore" />
     </v-layout>
   </div>
 </template>
