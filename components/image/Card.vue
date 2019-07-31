@@ -3,7 +3,7 @@
     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 18 : 0}`" class="elevation-0">
       <v-img
         :src="image.getImageRegular()"
-        :height="imageHeight"
+        :max-height="imageHeight"
         :lazy-src="image.getImageThumb()"
       />
       <color-boxes :colors="hexValues" />
@@ -49,7 +49,7 @@ export default {
     },
     imageHeight: {
       type: Number,
-      default: () => 250
+      default: () => 450
     }
   },
   data() {
