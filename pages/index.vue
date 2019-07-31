@@ -7,16 +7,15 @@
         </v-icon>Latest
       </h2>
       <v-layout align-start row wrap>
-        <v-flex
-          v-for="imageLatest in imagesLatest"
-          :key="imageLatest.id"
-          xl4
-          md6
-          xs12
-          pa-4
-        >
-          <image-card :image="imageLatest" />
-        </v-flex>
+        <layout-masonry>
+          <div
+            v-for="imageLatest in imagesLatest"
+            :key="imageLatest.id"
+            class="pa-4"
+          >
+            <image-card :image="imageLatest" />
+          </div>
+        </layout-masonry>
       </v-layout>
       <v-layout v-if="imagesLatest" align-center justify-center>
         <image-fetch-button text="Show more" @fetch="goTo('latest')" />
@@ -27,16 +26,15 @@
         <v-icon>mdi-fire</v-icon>Popular
       </h2>
       <v-layout align-start row wrap>
-        <v-flex
-          v-for="imagePopular in imagesPopular"
-          :key="imagePopular.id"
-          xl4
-          md6
-          xs12
-          pa-4
-        >
-          <image-card :image="imagePopular" />
-        </v-flex>
+        <layout-masonry>
+          <div
+            v-for="imagePopular in imagesPopular"
+            :key="imagePopular.id"
+            class="pa-4"
+          >
+            <image-card :image="imagePopular" />
+          </div>
+        </layout-masonry>
       </v-layout>
       <v-layout v-if="imagesPopular" align-center justify-center>
         <image-fetch-button text="Show more" @fetch="goTo('popular')" />
