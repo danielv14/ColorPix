@@ -43,6 +43,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
+    '@/plugins/vueMasonry',
     '@/plugins/api',
     '@/plugins/componentRegistration'
   ],
