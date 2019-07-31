@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     async getImagesList({ page = 1, perPage, orderBy }) {
-      // TODO: Use real api request for fetching images by keyword
       const { data } = await this.$api.getImagesList({
         page,
         perPage,
