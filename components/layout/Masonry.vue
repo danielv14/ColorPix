@@ -10,7 +10,7 @@ export default {
     cols: {
       type: [Object, String],
       default: () => {
-        return { default: 3, 1250: 2, 800: 1 }
+        return { default: 4, 1500: 3, 1250: 2, 800: 1 }
       }
     }
   }
