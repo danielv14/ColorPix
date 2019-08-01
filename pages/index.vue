@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <div>
     <div v-if="imagesLatest">
       <h2 class="pl-4">
         <v-icon class="gray lighten-2">
@@ -24,7 +24,7 @@
         <image-fetch-button text="Show more" @fetch="goTo('popular')" />
       </v-layout>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>

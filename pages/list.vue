@@ -4,7 +4,7 @@
       <layout-masonry-images :images="images" />
     </v-layout>
     <v-layout v-if="hasImages" align-center justify-center>
-      <image-fetch-button :loading="loadingImages" @fetch="loadMore" />
+      <image-fetch-button :loading="loadingImages" :lazy="true" @fetch="loadMore" />
     </v-layout>
   </div>
 </template>
@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     async getImagesList({ page = 1, perPage, orderBy }) {
-      // TODO: Use real api request for fetching images by keyword
       const { data } = await this.$api.getImagesList({
         page,
         perPage,
