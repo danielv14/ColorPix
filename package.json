@@ -1,6 +1,6 @@
 {
   "name": "color-pix",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Nuxt.js app to help users find inspiration from color palettes created via images from Unsplash",
   "author": "Daniel Vernberg",
   "private": true,
@@ -31,6 +31,7 @@
     "node-vibrant": "^3.2.0-alpha",
     "nuxt": "^2.6.1",
     "unsplash-js": "^5.0.0",
+    "vue-masonry-css": "^1.0.3",
     "vuetify": "^1.5.8",
     "vuetify-loader": "^1.2.0"
   },

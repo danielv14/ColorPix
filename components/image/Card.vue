@@ -1,9 +1,9 @@
 <template>
   <v-hover>
-    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 18 : 0}`" class="elevation-0">
+    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 16 : 0}`" class="elevation-0 image-card">
       <v-img
         :src="image.getImageRegular()"
-        :height="imageHeight"
+        :max-height="imageHeight"
         :lazy-src="image.getImageThumb()"
       />
       <color-boxes :colors="hexValues" />
@@ -49,7 +49,7 @@ export default {
     },
     imageHeight: {
       type: Number,
-      default: () => 250
+      default: () => 450
     }
   },
   data() {
@@ -135,5 +135,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
+.image-card:hover
+  transform: translateY(-2px)
+
 </style>

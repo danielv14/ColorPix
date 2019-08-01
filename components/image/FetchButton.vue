@@ -29,11 +29,25 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    lazy: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
       internalPage: this.page
+    }
+  },
+  created() {
+    if (this.lazy) {
+      window.addEventListener('scroll', this.handleScroll)
+    }
+  },
+  destroyed() {
+    if (this.lazy) {
+      window.removeEventListener('scroll', this.handleScroll)
     }
   },
   methods: {
@@ -43,11 +57,16 @@ export default {
     },
     stepPage() {
       this.internalPage += 1
+    },
+    handleScroll(evt) {
+      const positionY = this.$el.getBoundingClientRect().y
+      // Prevent multiple fetches by checking loading state (it's updated from the parent component)
+      if (positionY <= 1000 && !this.loading) {
+        this.fetch()
+      }
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>
