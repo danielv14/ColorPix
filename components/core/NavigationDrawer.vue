@@ -29,7 +29,7 @@ export default {
     return {
       clipped: true,
       drawer: false,
-      temporary: false,
+      temporary: true,
       darkTheme: false,
       title: 'ColorPix',
       items: [
