@@ -14,8 +14,7 @@ export default {
   data() {
     return {
       images: [],
-      loadingImages: false,
-      masonryCols: { default: 3, 1200: 2, 700: 1 }
+      loadingImages: false
     }
   },
   computed: {
