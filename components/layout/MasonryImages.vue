@@ -1,5 +1,5 @@
 <template>
-  <layout-masonry>
+  <layout-masonry :cols="cols">
     <div
       v-for="(image, index) in images"
       :key="index + image.id"  
@@ -16,6 +16,12 @@ export default {
     images: {
       type: Array,
       default: () => []
+    },
+    cols: {
+      type: [Object, String],
+      default: () => {
+        return { default: 4, 1500: 3, 1250: 2, 800: 1 }
+      }
     }
   }
 }
