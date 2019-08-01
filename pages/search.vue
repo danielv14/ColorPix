@@ -1,16 +1,15 @@
 <template>
   <div>
     <v-layout align-start row wrap>
-      <v-flex
-        v-for="(image, index) in images"
-        :key="index + image.id"  
-        xl4
-        md6
-        xs12
-        pa-4
-      >
-        <image-card :image="image" />
-      </v-flex>
+      <layout-masonry>
+        <div
+          v-for="(image, index) in images"
+          :key="index + image.id"  
+          class="pa-4"
+        >
+          <image-card :image="image" />
+        </div>
+      </layout-masonry>
     </v-layout>
 
     <v-layout v-if="hasImages" align-center justify-center>
