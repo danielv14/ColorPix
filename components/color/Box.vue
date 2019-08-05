@@ -2,7 +2,7 @@
   <v-hover>
     <div
       slot-scope="{ hover }"
-      :style="{backgroundColor: color, height: boxSize}"
+      :style="{ backgroundColor: color, height: boxSize }"
       class="color-box"
     >
       <v-expand-transition>
@@ -58,5 +58,4 @@ export default {
   justify-content: center
   position: absolute
   width: 100%
-
 </style>

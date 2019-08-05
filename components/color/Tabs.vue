@@ -1,17 +1,16 @@
 <template>
-  <v-tabs
-    v-model="activeTab"
-    slider-color="primary"
-    grow
-    hide-slider
-  >
+  <v-tabs v-model="activeTab" slider-color="primary" grow hide-slider>
     <v-tab v-for="tab in tabs" :key="tab" ripple>
       {{ tab }}
     </v-tab>
-    <v-tab-item v-for="(tab, index) in tabs" :key="tab + 'manipulation'" class="mt-2">
+    <v-tab-item
+      v-for="(tab, index) in tabs"
+      :key="tab + 'manipulation'"
+      class="mt-2"
+    >
       <color-slider
-        v-for="sliderSetting in colorManipulation[index]" 
-        :key="sliderSetting.type" 
+        v-for="sliderSetting in colorManipulation[index]"
+        :key="sliderSetting.type"
         :colors="colors"
         :type="sliderSetting.type"
         :label="sliderSetting.label"
@@ -49,5 +48,4 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>

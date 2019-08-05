@@ -4,7 +4,8 @@
       <h2 class="pl-4">
         <v-icon class="gray lighten-2">
           mdi-clock-outline
-        </v-icon>Latest
+        </v-icon>
+        Latest
       </h2>
       <v-layout align-start row wrap>
         <layout-masonry-images :images="imagesLatest" />
@@ -15,7 +16,8 @@
     </div>
     <div v-if="imagesPopular">
       <h2 class="pl-4">
-        <v-icon>mdi-fire</v-icon>Popular
+        <v-icon>mdi-fire</v-icon>
+        Popular
       </h2>
       <v-layout align-start row wrap>
         <layout-masonry-images :images="imagesPopular" />

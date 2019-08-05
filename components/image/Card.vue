@@ -1,6 +1,10 @@
 <template>
   <v-hover>
-    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 16 : 0}`" class="elevation-0 image-card">
+    <v-card
+      slot-scope="{ hover }"
+      :class="`elevation-${hover ? 16 : 0}`"
+      class="elevation-0 image-card"
+    >
       <v-img
         :src="image.getImageRegular()"
         :max-height="imageHeight"
@@ -13,7 +17,9 @@
         <color-clipboard-copy :colors="hexValues" />
 
         <v-btn icon @click="showContent = !showContent">
-          <v-icon>{{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+          <v-icon>
+            {{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+          </v-icon>
         </v-btn>
       </v-card-actions>
       <v-slide-y-transition>
@@ -78,7 +84,7 @@ export default {
     async onChangeSlider({ type, level }) {
       const manipulationMethod = getManipulationFromTypeAndThreshold({
         threshold: level,
-        type: type
+        type
       })
       this.setManipulationType({ type, level, method: manipulationMethod })
       this.hexValues = await this.getChangedHexValues()
@@ -138,5 +144,4 @@ export default {
 <style lang="stylus" scoped>
 .image-card:hover
   transform: translateY(-2px)
-
 </style>
