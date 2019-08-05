@@ -2,7 +2,13 @@
   <div @mouseleave="resetToolTip">
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn color="grey darken-1" flat icon @click="copyToClipBoard" v-on="on">
+        <v-btn
+          color="grey darken-1"
+          flat
+          icon
+          @click="copyToClipBoard"
+          v-on="on"
+        >
           <v-icon>content_copy</v-icon>
         </v-btn>
       </template>
@@ -43,6 +49,4 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>
