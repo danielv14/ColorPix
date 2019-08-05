@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="darkTheme">
+  <v-app :dark="isDarkMode">
     <core-navigation-drawer />
     <v-content>
       <v-container fluid>
@@ -14,7 +14,12 @@
 export default {
   data() {
     return {
-      darkTheme: false
+      darkTheme: this.$store.state.application.darkMode
+    }
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.state.application.darkMode
     }
   }
 }
