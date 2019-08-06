@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="sass" scoped>
 .app-toolbar
   box-shadow: 1px 2px 10px rgba(0,0,0,.1)
 </style>
