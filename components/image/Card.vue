@@ -1,40 +1,48 @@
 <template>
   <v-hover v-slot:default="{ hover }">
-    <v-card :elevation="hover ? 16 : 0" class="image-card">
-      <v-img
-        :src="image.getImageRegular()"
-        :max-height="imageHeight"
-        :lazy-src="image.getImageThumb()"
-      />
-      <color-boxes :colors="hexValues" />
-      <v-card-actions>
-        <image-attribute-link :user="image.getUserInfo()" />
-        <v-spacer />
-        <color-clipboard-copy :colors="hexValues" />
-
-        <v-btn icon @click="showContent = !showContent">
-          <v-icon>
-            {{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
-          </v-icon>
-        </v-btn>
-      </v-card-actions>
-      <v-slide-y-transition>
-        <v-card-text v-show="showContent">
-          <color-slider
-            :colors="colors"
-            label="Saturation"
-            type="saturation"
-            @change="onChangeSlider"
-          />
-          <color-slider
-            :colors="colors"
-            label="Brightness"
-            type="brightness"
-            @change="onChangeSlider"
-          />
-        </v-card-text>
-      </v-slide-y-transition>
-    </v-card>
+    <v-fade-transition tag="v-card">
+      <v-card
+        v-show="hasImgLoaded"
+        :elevation="hover ? 16 : 0"
+        class="image-card"
+      >
+        <v-img
+          :src="image.getImageRegular()"
+          :max-height="imageHeight"
+          :lazy-src="image.getImageThumb()"
+          @load="onImgLoad"
+        />
+        <v-fade-transition tag="color-boxes">
+          <color-boxes v-show="hexValues.length" :colors="hexValues" />
+        </v-fade-transition>
+        <v-card-actions>
+          <image-attribute-link :user="image.getUserInfo()" />
+          <v-spacer />
+          <color-clipboard-copy :colors="hexValues" />
+          <v-btn icon @click="showContent = !showContent">
+            <v-icon>
+              {{ showContent ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-slide-y-transition>
+          <v-card-text v-show="showContent">
+            <color-slider
+              :colors="colors"
+              label="Saturation"
+              type="saturation"
+              @change="onChangeSlider"
+            />
+            <color-slider
+              :colors="colors"
+              label="Brightness"
+              type="brightness"
+              @change="onChangeSlider"
+            />
+          </v-card-text>
+        </v-slide-y-transition>
+      </v-card>
+    </v-fade-transition>
   </v-hover>
 </template>
 
@@ -59,7 +67,8 @@ export default {
       showContent: false,
       colors: [],
       colorManipulation: {},
-      hexValues: []
+      hexValues: [],
+      hasImgLoaded: false
     }
   },
   computed: {
@@ -132,6 +141,9 @@ export default {
     async getChromaColors() {
       const chromaColors = await this.image.getChromaColors()
       return [...chromaColors]
+    },
+    onImgLoad() {
+      this.hasImgLoaded = true
     }
   }
 }
