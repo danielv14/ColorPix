@@ -56,8 +56,6 @@
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
     "vue-jest": "^3.0.4",
     "worker-loader": "^2.0.0"
   }
