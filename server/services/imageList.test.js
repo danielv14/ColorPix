@@ -24,9 +24,13 @@ describe('imageList.service', () => {
 
   it('shoulb be able to set sort order', async () => {
     const imagesLatest = await fetchImageList({ orderBy: 'latest' })
-    const imagesOldest = await fetchImageList({ orderBy: 'oldest' })
-    const dateNew = new Date(imagesLatest[0].created_at)
-    const dateOld = new Date(imagesOldest[0].created_at)
-    expect(dateNew > dateOld).toBe(true)
+    const imagesPopular = await fetchImageList({ orderBy: 'popular' })
+    const latestIds = imagesLatest.map(image => image.id)
+    const popularIds = imagesPopular.map(image => image.id)
+    // Lists can sometimes contain the same image. Determine different ids by cross reference the id lists
+    const overlapIds = latestIds.map(id => popularIds.includes(id))
+    expect(
+      overlapIds.filter(overlap => overlap).length < latestIds.length
+    ).toBe(true)
   })
 })
