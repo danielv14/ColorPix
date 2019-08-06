@@ -1,10 +1,6 @@
 <template>
-  <v-hover>
-    <v-card
-      slot-scope="{ hover }"
-      :class="`elevation-${hover ? 16 : 0}`"
-      class="elevation-0 image-card"
-    >
+  <v-hover v-slot:default="{ hover }">
+    <v-card :elevation="hover ? 16 : 0" class="image-card">
       <v-img
         :src="image.getImageRegular()"
         :max-height="imageHeight"
@@ -141,7 +137,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="sass" scoped>
+.image-card
+  transition: all 150ms ease-in-out
 .image-card:hover
   transform: translateY(-2px)
 </style>

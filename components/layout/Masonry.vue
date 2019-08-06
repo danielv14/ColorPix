@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="sass" scoped>
 .masonry-wrapper
   width: 100%
 </style>

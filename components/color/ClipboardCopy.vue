@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           color="grey darken-1"
-          flat
+          text
           icon
           @click="copyToClipBoard"
           v-on="on"
@@ -48,5 +48,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped></style>
