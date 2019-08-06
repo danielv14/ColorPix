@@ -5,21 +5,19 @@ describe('ImageRandom.service', () => {
     expect(imagesSearch).toBeDefined()
   })
 
-  it('should be able to fetch default set of images for given keyword', async done => {
+  it('should be able to fetch default set of images for given keyword', async () => {
     expect.assertions(1)
     const images = await imagesSearch({ keyword: 'dogs' })
     expect(images.results.length).toEqual(10)
-    done()
   })
 
-  it('should be able to set size of search result', async done => {
+  it('should be able to set size of search result', async () => {
     expect.assertions(1)
     const images = await imagesSearch({ keyword: 'dogs', perPage: 5 })
     expect(images.results.length).toEqual(5)
-    done()
   })
 
-  it('should be able to fetch multiple pages', async done => {
+  it('should be able to fetch multiple pages', async () => {
     expect.assertions(1)
     const imagesFirstPage = await imagesSearch({
       keyword: 'dogs',
@@ -34,13 +32,11 @@ describe('ImageRandom.service', () => {
     expect(imagesFirstPage.results[0].id).not.toMatch(
       imagesSecondPage.results[0].id
     )
-    done()
   })
 
-  it('should return empty search result when no keyword is passed', async done => {
+  it('should return empty search result when no keyword is passed', async () => {
     expect.assertions(1)
     const images = await imagesSearch({ keyword: '' })
     expect(images.results.length).toEqual(0)
-    done()
   })
 })
