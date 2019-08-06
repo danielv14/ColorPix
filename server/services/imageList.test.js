@@ -6,27 +6,23 @@ describe('imageList.service', () => {
   })
 
   it('should be able to retrieve a list of the latest images', async () => {
-    expect.assertions(2)
     const images = await fetchImageList()
     expect(images.length).toBeGreaterThan(1)
     expect(images[0]).toHaveProperty('id')
   })
 
   it('should be able to set size of image list to retrieve', async () => {
-    expect.assertions(1)
     const images = await fetchImageList({ perPage: 5 })
     expect(images.length).toBe(5)
   })
 
   it('should be able to retrieve different pages', async () => {
-    expect.assertions(1)
     const imagesFirstPage = await fetchImageList({ page: 1 })
     const imagesSecondPage = await fetchImageList({ page: 2 })
     expect(imagesFirstPage[0].id).not.toEqual(imagesSecondPage[0].id)
   })
 
   it('shoulb be able to set sort order', async () => {
-    expect.assertions(1)
     const imagesLatest = await fetchImageList({ orderBy: 'latest' })
     const imagesPopular = await fetchImageList({ orderBy: 'popular' })
     const latestIds = imagesLatest.map(image => image.id)
