@@ -1,5 +1,15 @@
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+const colors = require('vuetify/es5/util/colors').default
 const pkg = require('./package')
+
+const defaultTheme = {
+  primary: colors.pink.accent2,
+  accent: colors.grey.darken3,
+  secondary: colors.amber.darken3,
+  info: colors.teal.lighten1,
+  warning: colors.amber.base,
+  error: colors.deepOrange.accent4,
+  success: colors.green.accent3
+}
 require('dotenv').config()
 
 module.exports = {
@@ -36,17 +46,20 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  css: [],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/vuetify',
     '@/plugins/vueMasonry',
     '@/plugins/api',
     '@/plugins/componentRegistration'
   ],
+  /*
+   ** Nuxt.js development modules
+   */
+  devModules: ['@nuxtjs/vuetify'],
 
   /*
    ** Nuxt.js modules
@@ -66,17 +79,23 @@ module.exports = {
   },
 
   /*
+   ** Vuetify module configuration
+   ** https://github.com/nuxt-community/vuetify-module
+   */
+  vuetify: {
+    customVariables: ['~/assets/style/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        light: defaultTheme,
+        dark: defaultTheme
+      }
+    }
+  },
+  /*
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
-
     /*
      ** You can extend webpack config here
      */
