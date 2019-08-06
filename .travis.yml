@@ -3,4 +3,4 @@ node_js:
   - "node"
 cache: npm
 script:
-  - npm run test
+  - npm run test -- --maxWorkers 2
