@@ -6,7 +6,6 @@ describe('ImageRandom.service', () => {
   })
 
   it('should be able to retrieve a random image', async () => {
-    expect.assertions(3)
     const image = await fetchRandomImage()
     const imageSecond = await fetchRandomImage()
     expect(image.id).toBeDefined()
