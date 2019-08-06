@@ -1,10 +1,6 @@
 <template>
-  <v-hover>
-    <div
-      slot-scope="{ hover }"
-      :style="{ backgroundColor: color, height: boxSize }"
-      class="color-box"
-    >
+  <v-hover v-slot:default="{ hover }">
+    <div :style="{ backgroundColor: color, height: boxSize }" class="color-box">
       <v-expand-transition>
         <div
           v-if="hover && hoverEffect"

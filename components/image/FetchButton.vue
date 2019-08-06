@@ -1,5 +1,12 @@
 <template>
-  <v-btn round flat outline color="primary" :loading="loading" @click="fetch">
+  <v-btn
+    rounded
+    text
+    outlined
+    color="primary"
+    :loading="loading"
+    @click="fetch"
+  >
     {{ text }}
   </v-btn>
 </template>
