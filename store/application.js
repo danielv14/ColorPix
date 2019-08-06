@@ -9,6 +9,8 @@ export const getters = {
 export const mutations = {
   toggleDarkMode(state, value) {
     state.darkMode = value
+    // eslint-disable-next-line no-undef
+    $nuxt.$vuetify.theme.dark = value
   }
 }
 
