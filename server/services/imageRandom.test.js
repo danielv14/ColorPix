@@ -5,11 +5,13 @@ describe('ImageRandom.service', () => {
     expect(fetchRandomImage).toBeDefined()
   })
 
-  it('should be able to retrieve a random image', async () => {
-    const image = await fetchRandomImage()
-    const imageSecond = await fetchRandomImage()
-    expect(image.id).toBeDefined()
-    expect(image.description).toBeDefined()
-    expect(image.id).not.toMatch(imageSecond.id)
+  it('should be able to retrieve a random image', () => {
+    setTimeout(async () => {
+      const image = await fetchRandomImage()
+      const imageSecond = await fetchRandomImage()
+      expect(image.id).toBeDefined()
+      expect(image.description).toBeDefined()
+      expect(image.id).not.toMatch(imageSecond.id)
+    })
   })
 })
