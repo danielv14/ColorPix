@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 module.exports = {
+  setupFilesAfterEnv: ['./jest.setup.js'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
