@@ -1,4 +1,4 @@
-# ColorPix
+# ColorPix [![Build Status](https://travis-ci.org/danielv14/ColorPix.svg?branch=master)](https://travis-ci.org/danielv14/ColorPix)
 
 > Nuxt.js app to help users find inspiration from color palettes created via images from Unsplash
 

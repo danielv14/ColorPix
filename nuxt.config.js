@@ -1,13 +1,23 @@
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+const colors = require('vuetify/es5/util/colors').default
 const pkg = require('./package')
+
+const defaultTheme = {
+  primary: colors.pink.accent2,
+  accent: colors.grey.darken3,
+  secondary: colors.amber.darken3,
+  info: colors.teal.lighten1,
+  warning: colors.amber.base,
+  error: colors.deepOrange.accent4,
+  success: colors.green.accent3
+}
 require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: pkg.name
       .split('-')
@@ -29,28 +39,31 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#fff' },
 
   /*
-  ** Global CSS
-  */
-  css: ['~/assets/style/app.styl'],
+   ** Global CSS
+   */
+  css: [],
 
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
-    '@/plugins/vuetify',
     '@/plugins/vueMasonry',
     '@/plugins/api',
     '@/plugins/componentRegistration'
   ],
+  /*
+   ** Nuxt.js development modules
+   */
+  devModules: ['@nuxtjs/vuetify'],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
@@ -58,28 +71,34 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
   /*
-  ** Axios module configuration
-  */
+   ** Axios module configuration
+   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: process.env.NODE_ENV === 'production'
   },
 
   /*
-  ** Build configuration
-  */
-  build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
+   ** Vuetify module configuration
+   ** https://github.com/nuxt-community/vuetify-module
+   */
+  vuetify: {
+    customVariables: ['~/assets/style/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        light: defaultTheme,
+        dark: defaultTheme
       }
-    },
-
+    }
+  },
+  /*
+   ** Build configuration
+   */
+  build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       config.output.globalObject = 'this'
 

@@ -4,7 +4,11 @@
       <layout-masonry-images :images="images" />
     </v-layout>
     <v-layout v-if="hasImages" align-center justify-center>
-      <image-fetch-button :loading="loadingImages" :lazy="true" @fetch="loadMore" />
+      <image-fetch-button
+        :loading="loadingImages"
+        :lazy="true"
+        @fetch="loadMore"
+      />
     </v-layout>
   </div>
 </template>

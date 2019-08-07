@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="darkTheme">
+  <v-app>
     <core-navigation-drawer />
     <v-content>
       <v-container fluid>
@@ -11,11 +11,5 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      darkTheme: false
-    }
-  }
-}
+export default {}
 </script>

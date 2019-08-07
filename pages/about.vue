@@ -9,7 +9,8 @@
           </span>
         </h1>
         <p class="pt-2">
-          ColorPix is a image based website that helps users find inspiration from color palettes created via images from Unsplash!
+          ColorPix is a image based website that helps users find inspiration
+          from color palettes created via images from Unsplash!
         </p>
       </v-flex>
       <v-flex class="px-2" sm12 lg6>
@@ -21,9 +22,13 @@
         </h2>
 
         <p class="pt-2">
-          You simply browse the website either by searching for specific images or by diving into the popular/latest sections 
-          and ColorPix will give you the dominant colors from the images provided by Unsplash. <br>
-          You can play around with the color saturation or brightness and when you have found the color palette you want you easily copy it for use.
+          You simply browse the website either by searching for specific images
+          or by diving into the popular/latest sections and ColorPix will give
+          you the dominant colors from the images provided by Unsplash.
+        </p>
+        <p class="pt-2">
+          You can play around with the color saturation or brightness and when
+          you have found the color palette you want you easily copy it for use.
         </p>
       </v-flex>
     </v-layout>

@@ -6,7 +6,7 @@
     append-icon="search"
     class="searchbar"
     hide-details
-    box
+    filled
     full-width
     @click:append="search"
     @keyup.enter="search"
@@ -30,8 +30,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-
-
-</style>

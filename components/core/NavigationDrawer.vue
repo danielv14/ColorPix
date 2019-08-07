@@ -1,25 +1,42 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app :temporary="temporary">
+    <v-navigation-drawer
+      v-model="drawer"
+      :clipped="clipped"
+      fixed
+      app
+      :temporary="temporary"
+    >
       <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-tile-action>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
+        <v-list-item>
+          <v-list-item-action>
+            <core-theme-switch />
+          </v-list-item-action>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar :clipped-left="clipped" fixed app>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
+    <v-app-bar class="app-toolbar" :clipped-left="clipped" fixed app>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <core-search-field />
       <v-spacer />
-      <!-- <core-menu-settings /> -->
-    </v-toolbar>
+    </v-app-bar>
   </div>
 </template>
 
@@ -30,7 +47,6 @@ export default {
       clipped: true,
       drawer: false,
       temporary: true,
-      darkTheme: false,
       title: 'ColorPix',
       items: [
         {
@@ -59,4 +75,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="sass" scoped>
+.app-toolbar
+  box-shadow: 1px 2px 10px rgba(0,0,0,.1)
+</style>

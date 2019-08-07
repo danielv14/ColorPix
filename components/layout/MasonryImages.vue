@@ -1,10 +1,6 @@
 <template>
   <layout-masonry :cols="cols">
-    <div
-      v-for="(image, index) in images"
-      :key="index + image.id"  
-      class="pa-4"
-    >
+    <div v-for="(image, index) in images" :key="index + image.id" class="pa-4">
       <image-card :image="image" />
     </div>
   </layout-masonry>
@@ -26,6 +22,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-</style>

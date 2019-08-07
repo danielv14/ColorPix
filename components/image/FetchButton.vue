@@ -1,10 +1,10 @@
 <template>
   <v-btn
-    :loading="loading"
-    round
-    flat
-    outline
+    rounded
+    text
+    outlined
     color="primary"
+    :loading="loading"
     @click="fetch"
   >
     {{ text }}
@@ -68,5 +68,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped></style>

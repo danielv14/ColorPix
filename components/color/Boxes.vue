@@ -1,6 +1,9 @@
 <template>
   <v-layout>
-    <v-flex v-for="color in colors" :key="Math.floor(Math.random() * 1000) + color">
+    <v-flex
+      v-for="color in colors"
+      :key="Math.floor(Math.random() * 1000) + color"
+    >
       <color-box :color="color" :size="size" :hover-effect="hoverEffect" />
     </v-flex>
   </v-layout>

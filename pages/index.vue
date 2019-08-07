@@ -4,23 +4,25 @@
       <h2 class="pl-4">
         <v-icon class="gray lighten-2">
           mdi-clock-outline
-        </v-icon>Latest
+        </v-icon>
+        Latest
       </h2>
       <v-layout align-start row wrap>
         <layout-masonry-images :images="imagesLatest" />
       </v-layout>
-      <v-layout v-if="imagesLatest" align-center justify-center>
+      <v-layout v-if="hasLoadedLatest" align-center justify-center>
         <image-fetch-button text="Show more" @fetch="goTo('latest')" />
       </v-layout>
     </div>
     <div v-if="imagesPopular">
       <h2 class="pl-4">
-        <v-icon>mdi-fire</v-icon>Popular
+        <v-icon>mdi-fire</v-icon>
+        Popular
       </h2>
       <v-layout align-start row wrap>
         <layout-masonry-images :images="imagesPopular" />
       </v-layout>
-      <v-layout v-if="imagesPopular" align-center justify-center>
+      <v-layout v-if="hasLoadedPopular" align-center justify-center>
         <image-fetch-button text="Show more" @fetch="goTo('popular')" />
       </v-layout>
     </div>
@@ -33,6 +35,14 @@ export default {
     return {
       imagesLatest: [],
       imagesPopular: []
+    }
+  },
+  computed: {
+    hasLoadedPopular() {
+      return this.imagesPopular.length
+    },
+    hasLoadedLatest() {
+      return this.imagesLatest.length
     }
   },
   mounted() {
