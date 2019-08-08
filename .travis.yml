@@ -5,3 +5,6 @@ cache: npm
 script:
   - npm run test
   - npm run build
+env:
+  global:
+    - NODE_TLS_REJECT_UNAUTHORIZED=0
