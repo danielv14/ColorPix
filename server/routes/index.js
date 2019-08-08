@@ -24,5 +24,6 @@ router.get('/collection/:id/images', collectionsController.getCollectionImages)
 
 // Setup mock route for image list response
 router.get('/mock/list', mockDataController.getMockImageList)
+router.get('/mock/collections', mockDataController.getMockCollections)
 
 module.exports = router
