@@ -1,7 +1,47 @@
+const flatten = require('lodash/flatten')
+const cloneDeep = require('lodash/cloneDeep')
 const { unsplashWrapper } = require('../utils')
 const { unsplash, toJson } = unsplashWrapper
 
 const errorMissingID = 'Id is a required parameter'
+
+/**
+ * Get the 10 latest images from passed collections
+ * @param {Array} collections
+ * @returns {Promise[]} a flat list of images
+ */
+const getImagesFromCollections = async collections => {
+  const collectionsImagesPromise = collections.map(col =>
+    fetchCollectionImages({ id: col.id })
+  )
+  const resCollectionsImages = await Promise.all(collectionsImagesPromise)
+  return flatten(resCollectionsImages)
+}
+
+/**
+ * Merge collections with images by their collection_id
+ * @param {Object} param0
+ * @param {Array} param0.collections
+ * @param {Array} param0.images
+ * @returns {Array}
+ */
+const mergeCollectionsWithImages = ({ collections, images }) => {
+  const localCollections = cloneDeep(collections)
+  localCollections.forEach(col => {
+    col.images = images.filter(img => img.collection_id === col.id)
+  })
+  return localCollections
+}
+
+/**
+ * Build up collections with their 10 latest images and attach those images to the collection object
+ * @param {Array{collection}} collections
+ * @returns {Promise[]}
+ */
+const getCollectionsImagesAndMerge = async collections => {
+  const images = await getImagesFromCollections(collections)
+  return mergeCollectionsWithImages({ collections, images })
+}
 
 /**
  * Get a single page collections from the list of all collections
@@ -19,8 +59,11 @@ const fetchCollections = async ({ page = 1, perPage = 10, orderBy } = {}) => {
       perPage,
       orderBy
     )
-    const responseJson = await toJson(response)
-    return responseJson
+    const resCollections = await toJson(response)
+    const colsMergedWithImages = await getCollectionsImagesAndMerge(
+      resCollections
+    )
+    return colsMergedWithImages
   } catch (e) {
     throw new Error(e.message)
   }
@@ -40,15 +83,19 @@ const fetchFeaturedCollections = async ({ page = 1, perPage = 10 } = {}) => {
       page,
       perPage
     )
-    const responseJson = await toJson(response)
-    return responseJson
+    const resCollections = await toJson(response)
+    const colsMergedWithImages = await getCollectionsImagesAndMerge(
+      resCollections
+    )
+    return colsMergedWithImages
   } catch (e) {
     throw new Error(e.message)
   }
 }
 
 /**
- * Get a single collection
+ * Get a single collection.
+ * Method will not merge the collection with the 10 latest images from the collection
  * @param {Object} param0
  * @param {Number} param0.id id of collection
  *
@@ -94,6 +141,8 @@ const fetchCollectionImages = async ({
       orderBy
     )
     const responseJson = await toJson(response)
+    // Attach collection id to individual images for easier pairing
+    responseJson.forEach(image => (image.collection_id = id))
     return responseJson
   } catch (e) {
     throw new Error(e.message)

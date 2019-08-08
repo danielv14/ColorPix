@@ -18,6 +18,13 @@ describe('collections.service', () => {
       const collections = await fetchCollections({ perPage: 5 })
       expect(collections.length).toBe(5)
     })
+    it('should attach image previews to the collections', async () => {
+      const collections = await fetchCollections({ perPage: 5 })
+      const images = collections[0].images
+      images.map(image =>
+        expect(image.collection_id).toEqual(collections[0].id)
+      )
+    })
   })
   describe('fetchFeaturedCollections()', () => {
     it('should be defined', () => {
@@ -26,6 +33,13 @@ describe('collections.service', () => {
     it('should fetch a list of featured collections', async () => {
       const featuredCollections = await fetchFeaturedCollections()
       featuredCollections.map(col => expect(col.featured).toBeTruthy())
+    })
+    it('should attach image previews to the collections', async () => {
+      const collections = await fetchFeaturedCollections({ perPage: 5 })
+      const images = collections[0].images
+      images.map(image =>
+        expect(image.collection_id).toEqual(collections[0].id)
+      )
     })
   })
   describe('fetchCollection()', () => {
@@ -40,6 +54,12 @@ describe('collections.service', () => {
     })
     it('should throw error if no id parameter is passed', async () => {
       await fetchCollection().catch(e => expect(e).toBeDefined())
+    })
+    it('should not attach image previews', async () => {
+      const collections = await fetchCollections()
+      const id = collections[0].id
+      const collection = await fetchCollection({ id })
+      expect(collection).not.toHaveProperty('images')
     })
   })
   describe('fetchCollectionImages()', () => {
