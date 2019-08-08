@@ -55,5 +55,14 @@ describe('collections.service', () => {
     it('should throw error if no id parameter is passed', async () => {
       await fetchCollectionImages().catch(e => expect(e).toBeDefined())
     })
+    it('fake test to se if regular promises work with travis', async () => {
+      const promise1 = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve('foo')
+        }, 300)
+      })
+      const res = await promise1
+      expect(res).toEqual('foo')
+    })
   })
 })
