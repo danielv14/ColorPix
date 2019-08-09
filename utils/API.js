@@ -101,7 +101,7 @@ class API {
    * @param {Object} param0
    * @param {Number=} param0.page List result page to get
    * @param {Number=} param0.perPage List size to get
-   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections
+   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections. If omitted no images will be attached to collections
    * @returns {Promise[ImagePalette]}
    */
   getCollections({ page, perPage, imageCount } = {}) {
@@ -121,7 +121,7 @@ class API {
    * @param {Object} param0
    * @param {Number=} param0.page List result page to get
    * @param {Number=} param0.perPage List size to get
-   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections
+   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections. If omitted no images will be attached to collections
    * @returns {Promise[ImagePalette]}
    */
   getFeaturedCollections({ page, perPage, imageCount } = {}) {
