@@ -18,13 +18,15 @@ exports.getMockImageList = (req, res, next) => {
 
 /**
  * Get a mock response with 10 collections
+ * Expects includeImages as optional query params - ?includeImages=Boolean
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
 exports.getMockCollections = (req, res, next) => {
   try {
-    const data = mockDataCollectionsList()
+    const { includeImages } = req.query
+    const data = mockDataCollectionsList({ includeImages })
     res.send(data)
   } catch (e) {
     res.sendStatus(500) && next(e)

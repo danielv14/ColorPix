@@ -20,6 +20,15 @@ describe('mockData.service', () => {
       const data = mockDataCollectionsList()
       expect(data.length).toEqual(dataCollectionsList.length)
       expect(data[0].id).toEqual(dataCollectionsList[0].id)
+      expect(data[0].images.length).toEqual(
+        dataCollectionsList[0].images.length
+      )
+    })
+    it('should be able to retrive mockdata without images', () => {
+      let data = mockDataCollectionsList({ includeImages: false })
+      data.map(col => expect(col).toHaveProperty('images', []))
+      data = mockDataCollectionsList({ includeImages: undefined })
+      data.map(col => expect(col).toHaveProperty('images', []))
     })
   })
 })
