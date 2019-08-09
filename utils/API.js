@@ -1,4 +1,4 @@
-import { parserImage, parserImages } from './parsers'
+import { parserImage, parserImages, parserCollections } from './parsers'
 
 /**
  * API Class to be used to perform api requests to backend
@@ -94,6 +94,89 @@ class API {
    */
   getImagesPopular({ page = 1, perPage = 10 } = {}) {
     return this.getImagesList({ page, perPage, orderBy: 'popular' })
+  }
+
+  /**
+   * Get a single page from the list of all collections
+   * @param {Object} param0
+   * @param {Number=} param0.page List result page to get
+   * @param {Number=} param0.perPage List size to get
+   * @param {String=} param0.orderBy Set ordering of list. Accepts 'latest', 'oldest' and 'popular'
+   * @returns {Promise[ImagePalette]}
+   */
+  getCollections({ page, perPage, orderBy } = {}) {
+    // Validate sort order
+    const sortOrder = ['popular', 'latest', 'oldest', 'featured'].includes(
+      orderBy
+    )
+      ? orderBy
+      : 'latest'
+
+    // get featured collections
+    if (sortOrder === 'featured') {
+      return this.getFeaturedCollections({ page, perPage })
+    }
+    const config = {
+      params: {
+        page,
+        perPage,
+        orderBy: sortOrder
+      },
+      transformResponse: this._useParsers(parserCollections)
+    }
+    return this.request(this._url('collections'), config)
+  }
+
+  /**
+   * Get a single page from the list of all featured collections
+   * @param {Object} param0
+   * @param {Number=} param0.page List result page to get
+   * @param {Number=} param0.perPage List size to get
+   * @returns {Promise[ImagePalette]}
+   */
+  getFeaturedCollections({ page, perPage } = {}) {
+    const config = {
+      params: {
+        page,
+        perPage
+      },
+      transformResponse: this._useParsers(parserCollections)
+    }
+    return this.request(this._url('collections/featured'), config)
+  }
+
+  /**
+   * Get a single collection by id
+   * @param {Number} id of collection
+   * @returns {Object<Collection>}
+   */
+  getCollectionImages({ id, page, perPage, orderBy } = {}) {
+    // Validate sort order
+    const sortOrder = ['popular', 'latest', 'oldest', 'featured'].includes(
+      orderBy
+    )
+      ? orderBy
+      : 'latest'
+    const config = {
+      params: {
+        page,
+        perPage,
+        orderBy: sortOrder
+      },
+      transformResponse: this._useParsers(parserImages)
+    }
+    return this.request(this._url(`/collection/${id}/images`), config)
+  }
+
+  /**
+   * Get a mock response of collections list with 10 collections
+   * @returns {Promise[Collection]}
+   */
+  getMockDataCollections() {
+    const config = {
+      transformResponse: this._useParsers(parserCollections)
+    }
+    return this.request(this._url('/mock/collections'), config)
   }
 
   /**
