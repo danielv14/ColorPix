@@ -91,7 +91,7 @@ export default {
         {
           icon: 'mdi-image-multiple',
           title: 'List collections',
-          to: { path: '/collections', query: { imageCount: 4 } }
+          to: { path: '/collections' }
         }
       ]
     }
