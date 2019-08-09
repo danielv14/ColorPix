@@ -48,6 +48,11 @@ describe('Collection class', () => {
         expect(images[0].id).toEqual(rawCollection.images[0].id)
         expect(images.length).toEqual(rawCollection.images.length)
       })
+      it('should get preview images by a specific amount', () => {
+        const images = collection.getPreviewImages(2)
+        expect(images[0].id).toEqual(rawCollection.images[0].id)
+        expect(images.length).toEqual(2)
+      })
     })
   })
 })
