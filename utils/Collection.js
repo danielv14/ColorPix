@@ -31,9 +31,13 @@ class Collection {
 
   /**
    * Get attached preview images from the collection
+   * @param {Number} amount of images to get
    * @returns {Array[ImagePalette]}
    */
-  getPreviewImages() {
+  getPreviewImages(amount) {
+    if (amount) {
+      return this.images.slice(0, amount)
+    }
     return this.images
   }
 
