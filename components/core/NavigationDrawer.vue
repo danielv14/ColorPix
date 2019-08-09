@@ -89,19 +89,9 @@ export default {
       ],
       collectionLinks: [
         {
-          icon: 'mdi-clock-outline',
-          title: 'Latest collections',
-          to: { path: '/collections', query: { orderBy: 'latest' } }
-        },
-        {
-          icon: 'mdi-fire',
-          title: 'Popular collections',
-          to: { path: '/collections', query: { orderBy: 'popular' } }
-        },
-        {
-          icon: 'mdi-star-circle',
-          title: 'Featured collections',
-          to: { path: '/collections', query: { orderBy: 'featured' } }
+          icon: 'mdi-image-multiple',
+          title: 'List collections',
+          to: { path: '/collections', query: { imageCount: 4 } }
         }
       ]
     }

@@ -101,26 +101,15 @@ class API {
    * @param {Object} param0
    * @param {Number=} param0.page List result page to get
    * @param {Number=} param0.perPage List size to get
-   * @param {String=} param0.orderBy Set ordering of list. Accepts 'latest', 'oldest' and 'popular'
+   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections
    * @returns {Promise[ImagePalette]}
    */
-  getCollections({ page, perPage, orderBy } = {}) {
-    // Validate sort order
-    const sortOrder = ['popular', 'latest', 'oldest', 'featured'].includes(
-      orderBy
-    )
-      ? orderBy
-      : 'latest'
-
-    // get featured collections
-    if (sortOrder === 'featured') {
-      return this.getFeaturedCollections({ page, perPage })
-    }
+  getCollections({ page, perPage, imageCount } = {}) {
     const config = {
       params: {
         page,
         perPage,
-        orderBy: sortOrder
+        imageCount
       },
       transformResponse: this._useParsers(parserCollections)
     }
@@ -132,13 +121,15 @@ class API {
    * @param {Object} param0
    * @param {Number=} param0.page List result page to get
    * @param {Number=} param0.perPage List size to get
+   * @param {Number=} param0.imageCount Set amount of images to fetch from the collections
    * @returns {Promise[ImagePalette]}
    */
-  getFeaturedCollections({ page, perPage } = {}) {
+  getFeaturedCollections({ page, perPage, imageCount } = {}) {
     const config = {
       params: {
         page,
-        perPage
+        perPage,
+        imageCount
       },
       transformResponse: this._useParsers(parserCollections)
     }
