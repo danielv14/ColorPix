@@ -1,5 +1,5 @@
 export const state = () => ({
-  currentCollection: {}
+  currentCollection: null
 })
 
 export const getters = {

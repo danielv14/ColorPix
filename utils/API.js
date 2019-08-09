@@ -160,6 +160,22 @@ class API {
   }
 
   /**
+   * Get a single collection
+   * @param {Object} param0
+   * @param {Number=} param0.id Result page to get
+   * @returns {Promise[Collection]}
+   */
+  getCollection({ id } = {}) {
+    if (!id) {
+      return {}
+    }
+    const config = {
+      transformResponse: this._useParsers(parserCollections)
+    }
+    return this.request(this._url(`/collection/${id}`), config)
+  }
+
+  /**
    * Get a mock response of collections list with 10 collections
    * @returns {Promise[Collection]}
    */
