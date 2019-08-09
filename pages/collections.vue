@@ -12,6 +12,7 @@
               <n-link
                 :to="getCollectionLink(collection.id)"
                 class="collection-link"
+                @click.native="setCollection(collection)"
               >
                 {{ collection.title }}
               </n-link>
@@ -86,6 +87,9 @@ export default {
     },
     getCollectionLink(id) {
       return `/collection/${id}`
+    },
+    setCollection(collection) {
+      this.$store.dispatch('collection/setCurrentCollection', collection)
     }
   }
 }
