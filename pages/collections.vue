@@ -40,7 +40,7 @@
       <image-fetch-button
         :loading="loadingCollections"
         :lazy="true"
-        :per-page="3"
+        :per-page="collectionCount"
         @fetch="loadMore"
       />
     </v-layout>
@@ -53,7 +53,8 @@ export default {
     return {
       collections: [],
       loadingCollections: false,
-      imageCount: 3
+      imageCount: 3,
+      collectionCount: 3
     }
   },
   computed: {
