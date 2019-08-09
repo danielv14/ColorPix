@@ -7,7 +7,7 @@
       app
       :temporary="temporary"
     >
-      <v-list>
+      <v-list rounded>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -23,6 +23,23 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider />
+        <v-subheader>Collections</v-subheader>
+        <v-list-item
+          v-for="(item, i) in collectionLinks"
+          :key="i + '_collections'"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
+        <v-subheader>Settings</v-subheader>
         <v-list-item>
           <v-list-item-action>
             <core-theme-switch />
@@ -46,7 +63,7 @@ export default {
     return {
       clipped: true,
       drawer: false,
-      temporary: true,
+      temporary: false,
       title: 'ColorPix',
       items: [
         {
@@ -68,6 +85,23 @@ export default {
           icon: 'mdi-information-variant',
           title: 'About',
           to: '/about'
+        }
+      ],
+      collectionLinks: [
+        {
+          icon: 'mdi-clock-outline',
+          title: 'Latest collections',
+          to: { path: '/collections', query: { orderBy: 'latest' } }
+        },
+        {
+          icon: 'mdi-fire',
+          title: 'Popular collections',
+          to: { path: '/collections', query: { orderBy: 'popular' } }
+        },
+        {
+          icon: 'mdi-star-circle',
+          title: 'Featured collections',
+          to: { path: '/collections', query: { orderBy: 'featured' } }
         }
       ]
     }
