@@ -53,7 +53,7 @@ export default {
     }
   },
   async mounted() {
-    this.collection = this.$store.state.collection.currentCollection
+    await this.setCollection(this.$route.params.id)
     this.breadcrumbs.push({
       text: this.collection.title || 'Current collection',
       disabled: true
@@ -63,6 +63,15 @@ export default {
     })
   },
   methods: {
+    async setCollection(id) {
+      if (this.$store.state.collection.currentCollection) {
+        this.collection = this.$store.state.collection.currentCollection
+        return
+      }
+      const { data } = await this.$api.getCollection({ id })
+      this.collection = data
+      this.$store.dispatch('collection/setCurrentCollection', this.collection)
+    },
     async getCollectionImages({ id, page = 1, perPage, orderBy }) {
       const { data } = await this.$api.getCollectionImages({
         id,
