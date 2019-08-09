@@ -48,17 +48,12 @@ const getCollectionsImagesAndMerge = async collections => {
  * @param {Object} param0
  * @param {Number=} [param0.page=1] Tatget specific page in the image list
  * @param {Number=} [param0.perPage=10] Size of each image list result
- * @param {String=} [param0.orderBy='latest'] Set sort order of image list set. Accepts 'oldest', 'latest' and 'popular'
  *
  * @returns {Promise}
  */
-const fetchCollections = async ({ page = 1, perPage = 10, orderBy } = {}) => {
+const fetchCollections = async ({ page = 1, perPage = 10 } = {}) => {
   try {
-    const response = await unsplash.collections.listCollections(
-      page,
-      perPage,
-      orderBy
-    )
+    const response = await unsplash.collections.listCollections(page, perPage)
     const resCollections = await toJson(response)
     const colsMergedWithImages = await getCollectionsImagesAndMerge(
       resCollections

@@ -15,11 +15,10 @@ const {
  */
 exports.getCollections = async (req, res, next) => {
   try {
-    const { page, perPage, orderBy } = req.query
+    const { page, perPage } = req.query
     const collections = await fetchCollections({
       page,
-      perPage,
-      orderBy
+      perPage
     })
     res.send(collections)
     next()
