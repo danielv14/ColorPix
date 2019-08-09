@@ -41,7 +41,10 @@ const mergeCollectionsWithImages = ({ collections, images }) => {
  * @returns {Promise[]}
  */
 const getCollectionsImagesAndMerge = async (collections, imageCount) => {
-  const images = await getImagesFromCollections(collections, imageCount)
+  let images = []
+  if (imageCount) {
+    images = await getImagesFromCollections(collections, imageCount)
+  }
   return mergeCollectionsWithImages({ collections, images })
 }
 
@@ -50,14 +53,14 @@ const getCollectionsImagesAndMerge = async (collections, imageCount) => {
  * @param {Object} param0
  * @param {Number=} [param0.page=1] Target specific page in the image list
  * @param {Number=} [param0.perPage=10] Size of each image list result
- * @param {Number=} [param0.imageCount=4] Amount of images to fetch from the collections
+ * @param {Number} param0.imageCount Amount of images to fetch from the collections
  *
  * @returns {Promise}
  */
 const fetchCollections = async ({
   page = 1,
   perPage = 10,
-  imageCount = 4
+  imageCount
 } = {}) => {
   try {
     const response = await unsplash.collections.listCollections(page, perPage)
@@ -77,14 +80,14 @@ const fetchCollections = async ({
  * @param {Object} param0
  * @param {Number=} [param0.page=1] Target specific page in the image list
  * @param {Number=} [param0.perPage=10] Size of each image list result
- * @param {Number=} [param0.imageCount=4] Amount of images to fetch from the collections
+ * @param {Number=} param0.imageCount Amount of images to fetch from the collections
  *
  * @returns {Promise}
  */
 const fetchFeaturedCollections = async ({
   page = 1,
   perPage = 10,
-  imageCount = 4
+  imageCount
 } = {}) => {
   try {
     const response = await unsplash.collections.listFeaturedCollections(

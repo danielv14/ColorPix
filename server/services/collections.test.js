@@ -18,12 +18,16 @@ describe('collections.service', () => {
       const collections = await fetchCollections({ perPage: 5 })
       expect(collections.length).toBe(5)
     })
-    it('should attach image previews to the collections', async () => {
-      const collections = await fetchCollections({ perPage: 5 })
+    it('should attach image previews to the collections if using imageCount param', async () => {
+      const collections = await fetchCollections({ perPage: 5, imageCount: 3 })
       const images = collections[0].images
       images.map(image =>
         expect(image.collection_id).toEqual(collections[0].id)
       )
+    })
+    it('should be able to fetch collections without preview images', async () => {
+      const collections = await fetchCollections({ perPage: 5 })
+      collections.map(col => expect(col).toHaveProperty('images', []))
     })
   })
   describe('fetchFeaturedCollections()', () => {
@@ -34,8 +38,11 @@ describe('collections.service', () => {
       const featuredCollections = await fetchFeaturedCollections()
       featuredCollections.map(col => expect(col.featured).toBeTruthy())
     })
-    it('should attach image previews to the collections', async () => {
-      const collections = await fetchFeaturedCollections({ perPage: 5 })
+    it('should attach image previews to the collections if using the imageCount param', async () => {
+      const collections = await fetchFeaturedCollections({
+        perPage: 5,
+        imageCount: 3
+      })
       const images = collections[0].images
       images.map(image =>
         expect(image.collection_id).toEqual(collections[0].id)
