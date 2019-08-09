@@ -8,17 +8,18 @@ const {
 
 /**
  * Get a single page of from the list of all collections
- * Expects page, perPage and orderBy as optional params - ?page=Number,perPage=Number,orderBy=String
+ * Expects page, perPage and imageCount as optional query params - ?page=Number,perPage=Number,imageCont=Number
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
 exports.getCollections = async (req, res, next) => {
   try {
-    const { page, perPage } = req.query
+    const { page, perPage, imageCount } = req.query
     const collections = await fetchCollections({
       page,
-      perPage
+      perPage,
+      imageCount
     })
     res.send(collections)
     next()
@@ -29,17 +30,18 @@ exports.getCollections = async (req, res, next) => {
 
 /**
  * GET a single page of from the list of featured collections
- * Expects page and perPage as optional query params - ?page=Number,perPage=Number
+ * Expects page, perPage and imageCount as optional query params - ?page=Number,perPage=Number,imageCont=Number
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
 exports.getFeaturedCollections = async (req, res, next) => {
   try {
-    const { page, perPage } = req.query
+    const { page, perPage, imageCount } = req.query
     const collections = await fetchFeaturedCollections({
       page,
-      perPage
+      perPage,
+      imageCount
     })
     res.send(collections)
     next()
