@@ -30,11 +30,11 @@ class Collection {
   }
 
   /**
-   * Get attached preview images from the collection
+   * Get attached images from the collection
    * @param {Number} amount of images to get
    * @returns {Array[ImagePalette]}
    */
-  getPreviewImages(amount) {
+  getImages(amount) {
     if (amount) {
       return this.images.slice(0, amount)
     }
@@ -42,14 +42,33 @@ class Collection {
   }
 
   /**
+   * Get attached preview images from the collection
+   * Preview images does only contain the urls and id of images. No user info and such
+   * @param {Number} amount of images to get
+   * @returns {Array[ImagePalette]}
+   */
+  getPreviewImages(amount) {
+    if (amount) {
+      return this.preview_photos.slice(0, amount)
+    }
+    return this.preview_photos
+  }
+
+  /**
    * Transform attached preview images to ImagePalette instances
    * if they are present on the collection object
    */
   _createImagePalettes() {
-    this.images =
-      this.images && this.images.length > 0
-        ? (this.images = this.images.map(image => new ImagePalette(image)))
-        : []
+    if (this.images && this.images.length > 0) {
+      this.images = this.images.map(image => new ImagePalette(image))
+    } else {
+      this.images = []
+    }
+    if (this.preview_photos) {
+      this.preview_photos = this.preview_photos.map(
+        img => new ImagePalette(img)
+      )
+    }
   }
 }
 
