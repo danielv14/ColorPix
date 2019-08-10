@@ -1,10 +1,15 @@
 <template>
   <span class="grey--text">
-    By
-    <a class="grey--text" :href="linkUser">
-      {{ user.username }}
-    </a>
-    on
+    <span v-if="user.username">
+      By
+      <a class="grey--text" :href="linkUser">
+        {{ user.username }}
+      </a>
+      on
+    </span>
+    <span v-else>
+      Image from
+    </span>
     <a class="grey--text" :href="linkSource">
       Unsplash
     </a>
