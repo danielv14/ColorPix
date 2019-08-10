@@ -56,7 +56,7 @@ class Image {
    * @returns {Object}
    */
   getUserInfo() {
-    return this.user
+    return this.user || {}
   }
 
   /**
@@ -64,6 +64,9 @@ class Image {
    * @returns {String}
    */
   getUserNameFormatted() {
+    if (!this.user) {
+      return ''
+    }
     return `${this.user.first_name} ${this.user.last_name}`
   }
 }
