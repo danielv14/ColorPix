@@ -45,11 +45,23 @@ describe('Collection class', () => {
     describe('getPreviewImages()', () => {
       it('should get preview images attached to the collection', () => {
         const images = collection.getPreviewImages()
+        expect(images[0].id).toEqual(rawCollection.preview_photos[0].id)
+        expect(images.length).toEqual(rawCollection.preview_photos.length)
+      })
+      it('should get preview images by a specific amount', () => {
+        const images = collection.getPreviewImages(2)
+        expect(images[0].id).toEqual(rawCollection.preview_photos[0].id)
+        expect(images.length).toEqual(2)
+      })
+    })
+    describe('getImages()', () => {
+      it('should get preview images attached to the collection', () => {
+        const images = collection.getImages()
         expect(images[0].id).toEqual(rawCollection.images[0].id)
         expect(images.length).toEqual(rawCollection.images.length)
       })
       it('should get preview images by a specific amount', () => {
-        const images = collection.getPreviewImages(2)
+        const images = collection.getImages(2)
         expect(images[0].id).toEqual(rawCollection.images[0].id)
         expect(images.length).toEqual(2)
       })
