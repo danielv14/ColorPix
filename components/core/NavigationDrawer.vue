@@ -90,7 +90,7 @@ export default {
       collectionLinks: [
         {
           icon: 'mdi-image-multiple',
-          title: 'List collections',
+          title: 'Explore collections',
           to: { path: '/collections' }
         }
       ]
