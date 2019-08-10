@@ -20,7 +20,7 @@
     <slot name="content">
       <v-layout wrap>
         <v-flex
-          v-for="image in collection.getPreviewImages(imageCount)"
+          v-for="image in collection.getImages(imageCount)"
           :key="image.id"
           md6
           lg4
