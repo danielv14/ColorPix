@@ -54,4 +54,5 @@ export default {
   justify-content: center
   position: absolute
   width: 100%
+  font-size: 0.85em
 </style>
