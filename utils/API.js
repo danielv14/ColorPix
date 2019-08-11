@@ -137,6 +137,29 @@ class API {
   }
 
   /**
+   * Get collections by keyword
+   * @param {Object} param0
+   * @param {String} param0.keyword keyword to search by
+   * @param {Number} param0.page search result page to get
+   * @param {Number} param0.perPage determine size of search result to get at the time
+   * @returns {Promise[Collection]}
+   */
+  getCollectionsByKeyword({ keyword, page, perPage }) {
+    if (!keyword) {
+      return {}
+    }
+    const config = {
+      params: {
+        keyword,
+        page,
+        perPage
+      },
+      transformResponse: this._useParsers(parserCollections)
+    }
+    return this.request.get(this._url('collections/search'), config)
+  }
+
+  /**
    * Get a single collection by id
    * @param {Number} id of collection
    * @returns {Object<Collection>}
