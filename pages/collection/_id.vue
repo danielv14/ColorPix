@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout align-center column>
-      <v-breadcrumbs :items="breadcrumbs" divider=">" />
+      <!-- <v-breadcrumbs :items="breadcrumbs" divider=">" /> -->
       <h2>{{ collection.title }}</h2>
       <span class="grey--text">
         {{ collection.total_photos }} images.
