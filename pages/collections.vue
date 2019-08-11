@@ -27,8 +27,8 @@ export default {
     return {
       collections: [],
       loadingCollections: false,
-      imageCount: 3,
-      collectionCount: 3
+      imageCount: null, // Set to a number to have API fetch actual images attached to collections
+      collectionCount: 6
     }
   },
   computed: {
@@ -38,7 +38,8 @@ export default {
   },
   async mounted() {
     this.collections = await this.getCollections({
-      imageCount: this.imageCount
+      imageCount: this.imageCount,
+      perPage: this.collectionCount
     })
   },
   methods: {
