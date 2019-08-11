@@ -184,7 +184,9 @@ const searchCollections = async ({
       resCollections.results,
       imageCount
     )
-    return colsMergedWithImages
+    return Object.assign(resCollections, {
+      results: colsMergedWithImages
+    })
   } catch (e) {
     throw new Error(e.message)
   }
