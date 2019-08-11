@@ -1,7 +1,17 @@
 <template>
   <div>
     <v-layout align-center column>
-      <!-- <v-breadcrumbs :items="breadcrumbs" divider=">" /> -->
+      <v-breadcrumbs :items="breadcrumbs" divider=">">
+        <template v-slot:item="props">
+          <v-breadcrumbs-item
+            :to="props.item"
+            :class="[props.item.disabled && 'disabled']"
+            nuxt
+          >
+            {{ formatBreadcrumbName(props.item.name) }}
+          </v-breadcrumbs-item>
+        </template>
+      </v-breadcrumbs>
       <h2>{{ collection.title }}</h2>
       <span class="grey--text">
         {{ collection.total_photos }} images.
@@ -37,13 +47,7 @@ export default {
       collection: { user: {} },
       images: [],
       loadingImages: false,
-      breadcrumbs: [
-        {
-          text: 'Collections',
-          disabled: false,
-          to: '/collections'
-        }
-      ]
+      breadcrumbs: []
     }
   },
   computed: {
@@ -53,8 +57,9 @@ export default {
   },
   async mounted() {
     await this.setCollection(this.$route.params.id)
+    this.setBreadcrumbs()
     this.breadcrumbs.push({
-      text: this.collection.title || 'Current collection',
+      name: this.collection.title || 'Current collection',
       disabled: true
     })
     this.images = await this.getCollectionImages({
@@ -90,6 +95,16 @@ export default {
       })
       this.images.push(...newImages)
       this.loadingImages = false
+    },
+    setBreadcrumbs() {
+      const previousRoute = this.$store.state.application.previousRoute
+      this.breadcrumbs.push(previousRoute)
+    },
+    formatBreadcrumbName(name) {
+      if (name.includes('search-')) {
+        return name.split('-').join(' for ')
+      }
+      return name
     }
   }
 }

@@ -11,5 +11,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  watch: {
+    $route(to, from) {
+      this.$store.dispatch('application/setPreviousRoute', from)
+    }
+  }
+}
 </script>
