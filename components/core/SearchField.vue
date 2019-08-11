@@ -25,7 +25,13 @@ export default {
   },
   methods: {
     search() {
-      this.$router.push({ name: 'search', query: { keyword: this.input } })
+      const searchPart = this.$route.path.includes('search/collections')
+        ? 'collections'
+        : 'images'
+      this.$router.push({
+        path: `/search/${searchPart}`,
+        query: { keyword: this.input }
+      })
     }
   }
 }
