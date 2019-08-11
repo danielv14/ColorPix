@@ -25,7 +25,10 @@
 </template>
 
 <script>
+import mixinCollections from '~/mixins/mixinCollections'
+
 export default {
+  mixins: [mixinCollections],
   data() {
     return {
       collections: [],
@@ -37,9 +40,6 @@ export default {
   computed: {
     keyword() {
       return this.$route.query.keyword
-    },
-    hasCollections() {
-      return this.collections.length > 0
     },
     hasLoadedAllCollections() {
       return this.totalCollections === this.collections.length
@@ -60,14 +60,6 @@ export default {
     this.collections = collections
   },
   methods: {
-    async getCollectionsByKeyword({ keyword, page = 1, perPage }) {
-      const { data } = await this.$api.getCollectionsByKeyword({
-        keyword,
-        page,
-        perPage
-      })
-      return { collections: data.results, total: data.total }
-    },
     async loadMore({ page, perPage }) {
       this.loadingCollections = true
       const { collections } = await this.getCollectionsByKeyword({

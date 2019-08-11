@@ -15,7 +15,10 @@
 </template>
 
 <script>
+import mixinImages from '~/mixins/mixinImages'
+
 export default {
+  mixins: [mixinImages],
   data() {
     return {
       images: [],
@@ -25,9 +28,6 @@ export default {
   computed: {
     keyword() {
       return this.$route.query.keyword
-    },
-    hasImages() {
-      return this.images.length > 0
     }
   },
   watch: {
