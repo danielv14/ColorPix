@@ -33,6 +33,10 @@ export default {
     lazy: {
       type: Boolean,
       default: false
+    },
+    scrollThreshold: {
+      type: Number,
+      default: 1300
     }
   },
   data() {
@@ -61,7 +65,7 @@ export default {
     handleScroll(evt) {
       const positionY = this.$el.getBoundingClientRect().y
       // Prevent multiple fetches by checking loading state (it's updated from the parent component)
-      if (positionY <= 1000 && !this.loading) {
+      if (positionY <= this.scrollThreshold && !this.loading) {
         this.fetch()
       }
     }
