@@ -161,9 +161,29 @@ const fetchCollectionImages = async ({
   }
 }
 
+/**
+ * Get a single page of collections by keyword
+ * @param {Object} param0
+ * @param {Number=} [param0.page=1] Target specific page in the image list
+ * @param {Number=} [param0.perPage=10] Size of each image list result
+ * @param {String} param0.keyword Keyword to searchby
+ *
+ * @returns {Promise}
+ */
+const searchCollections = async ({ page = 1, perPage = 10, keyword } = {}) => {
+  try {
+    const response = await unsplash.search.collections(keyword, page, perPage)
+    const responseJson = await toJson(response)
+    return responseJson
+  } catch (e) {
+    throw new Error(e.message)
+  }
+}
+
 module.exports = {
   fetchCollections,
   fetchFeaturedCollections,
   fetchCollection,
-  fetchCollectionImages
+  fetchCollectionImages,
+  searchCollections
 }
