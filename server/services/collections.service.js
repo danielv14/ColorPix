@@ -166,15 +166,25 @@ const fetchCollectionImages = async ({
  * @param {Object} param0
  * @param {Number=} [param0.page=1] Target specific page in the image list
  * @param {Number=} [param0.perPage=10] Size of each image list result
- * @param {String} param0.keyword Keyword to searchby
+ * @param {String} param0.keyword Keyword to search by
+ * @param {Number} param0.imageCount Amount of images to fetch from the collections
  *
  * @returns {Promise}
  */
-const searchCollections = async ({ page = 1, perPage = 10, keyword } = {}) => {
+const searchCollections = async ({
+  page = 1,
+  perPage = 10,
+  keyword,
+  imageCount
+} = {}) => {
   try {
     const response = await unsplash.search.collections(keyword, page, perPage)
-    const responseJson = await toJson(response)
-    return responseJson
+    const resCollections = await toJson(response)
+    const colsMergedWithImages = await getCollectionsImagesAndMerge(
+      resCollections.results,
+      imageCount
+    )
+    return colsMergedWithImages
   } catch (e) {
     throw new Error(e.message)
   }

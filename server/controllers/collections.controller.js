@@ -53,18 +53,19 @@ exports.getFeaturedCollections = async (req, res, next) => {
 
 /**
  * GET a single page of from the list of collections by a specific keyword
- * Expects page, perPage and keyword as optional query params - ?page=Number,perPage=Number,keyword=String
+ * Expects page, perPage, imageCount and keyword as optional query params - ?page=Number,perPage=Number,keyword=String,imageCount=Number
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
 exports.getCollectionsByKeyword = async (req, res, next) => {
   try {
-    const { page, perPage, keyword } = req.query
+    const { page, perPage, keyword, imageCount } = req.query
     const collections = await searchCollections({
       page,
       perPage,
-      keyword
+      keyword,
+      imageCount
     })
     res.send(collections)
     next()

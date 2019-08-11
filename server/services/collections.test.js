@@ -90,14 +90,24 @@ describe('collections.service', () => {
     })
     it('should fetch collections by a keyword', async () => {
       const collections = await searchCollections({ keyword: 'cats' })
-      expect(collections.results.length).toBeTruthy()
+      expect(collections.length).toBeTruthy()
     })
     it('should be able to limit result length', async () => {
       const collections = await searchCollections({
         keyword: 'cats',
         perPage: 2
       })
-      expect(collections.results.length).toBe(2)
+      expect(collections.length).toBe(2)
+    })
+    it('should attach image previews to the collections if using the imageCount param', async () => {
+      const collections = await searchCollections({
+        keyword: 'cats',
+        imageCount: 2
+      })
+      const images = collections[0].images
+      images.map(image =>
+        expect(image.collection_id).toEqual(collections[0].id)
+      )
     })
   })
 })
