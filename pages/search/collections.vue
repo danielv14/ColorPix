@@ -48,7 +48,8 @@ export default {
   watch: {
     async $route(to, from) {
       const keyword = to.query.keyword
-      this.collections = await this.getCollectionsByKeyword({ keyword })
+      const { collections } = await this.getCollectionsByKeyword({ keyword })
+      this.collections = collections
     }
   },
   async mounted() {
