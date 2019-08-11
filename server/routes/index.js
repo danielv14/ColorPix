@@ -19,6 +19,7 @@ router.get(
   '/collections/featured',
   collectionsController.getFeaturedCollections
 )
+router.get('/collections/search', collectionsController.getCollectionsByKeyword)
 router.get('/collection/:id', collectionsController.getCollection)
 router.get('/collection/:id/images', collectionsController.getCollectionImages)
 

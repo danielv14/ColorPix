@@ -2,7 +2,8 @@ import {
   fetchCollections,
   fetchFeaturedCollections,
   fetchCollection,
-  fetchCollectionImages
+  fetchCollectionImages,
+  searchCollections
 } from './collections.service'
 
 describe('collections.service', () => {
@@ -81,6 +82,22 @@ describe('collections.service', () => {
     })
     it('should throw error if no id parameter is passed', async () => {
       await fetchCollectionImages().catch(e => expect(e).toBeDefined())
+    })
+  })
+  describe('searchCollections()', () => {
+    it('should be defined', () => {
+      expect(searchCollections).toBeDefined()
+    })
+    it('should fetch collections by a keyword', async () => {
+      const collections = await searchCollections({ keyword: 'cats' })
+      expect(collections.results.length).toBeTruthy()
+    })
+    it('should be able to limit result length', async () => {
+      const collections = await searchCollections({
+        keyword: 'cats',
+        perPage: 2
+      })
+      expect(collections.results.length).toBe(2)
     })
   })
 })

@@ -3,7 +3,8 @@ const {
   fetchCollections,
   fetchFeaturedCollections,
   fetchCollection,
-  fetchCollectionImages
+  fetchCollectionImages,
+  searchCollections
 } = collectionsService
 
 /**
@@ -42,6 +43,28 @@ exports.getFeaturedCollections = async (req, res, next) => {
       page,
       perPage,
       imageCount
+    })
+    res.send(collections)
+    next()
+  } catch (e) {
+    res.sendStatus(500) && next(e)
+  }
+}
+
+/**
+ * GET a single page of from the list of collections by a specific keyword
+ * Expects page, perPage and keyword as optional query params - ?page=Number,perPage=Number,keyword=String
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+exports.getCollectionsByKeyword = async (req, res, next) => {
+  try {
+    const { page, perPage, keyword } = req.query
+    const collections = await searchCollections({
+      page,
+      perPage,
+      keyword
     })
     res.send(collections)
     next()
