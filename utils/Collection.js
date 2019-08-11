@@ -64,10 +64,12 @@ class Collection {
     } else {
       this.images = []
     }
-    if (this.preview_photos) {
+    if (this.preview_photos && Array.isArray(this.preview_photos)) {
       this.preview_photos = this.preview_photos.map(
         img => new ImagePalette(img)
       )
+    } else {
+      this.preview_photos = []
     }
   }
 }
