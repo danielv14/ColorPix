@@ -1,9 +1,9 @@
 <template>
   <span class="grey--text">
-    <span v-if="user.username">
+    <span v-if="user.name">
       By
       <a class="grey--text" :href="linkUser">
-        {{ user.username }}
+        {{ userName() }}
       </a>
       on
     </span>
@@ -38,6 +38,14 @@ export default {
         .split(' ')
         .join('_')
         .toLowerCase()
+    }
+  },
+  methods: {
+    userName() {
+      if (!this.user) {
+        return ''
+      }
+      return this.user.name || this.user.userName
     }
   }
 }
