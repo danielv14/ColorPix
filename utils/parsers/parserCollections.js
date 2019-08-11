@@ -12,7 +12,7 @@ export default function parserCollections(data) {
   // Support search result collections response
   if (data.results) {
     data.results = data.results.map(col => new Collection(col))
-    return data.results
+    return data
   }
   // Support multiple collections creation
   if (data.length > 0) {
