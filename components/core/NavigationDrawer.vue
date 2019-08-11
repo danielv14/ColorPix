@@ -54,18 +54,7 @@
       <core-search-field />
       <v-spacer />
       <template v-if="shouldDisplaySearchTabs" v-slot:extension>
-        <v-tabs
-          align-with-title
-          class="search-tabs"
-          background-color="transparent"
-        >
-          <v-tab nuxt exact :to="getRoute('images')">
-            Search Images
-          </v-tab>
-          <v-tab nuxt exact :to="getRoute('collections')">
-            Search Collections
-          </v-tab>
-        </v-tabs>
+        <core-search-navigation-tabs />
       </template>
     </v-app-bar>
   </div>
@@ -129,7 +118,4 @@ export default {
 <style lang="sass" scoped>
 .app-toolbar
   box-shadow: 1px 2px 10px rgba(0,0,0,.1)
-.search-tabs
-  justify-content: center
-  display: flex
 </style>
