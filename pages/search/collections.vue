@@ -11,7 +11,11 @@
       </v-container>
     </v-layout>
     <v-layout v-if="hasCollections" align-center justify-center>
+      <p v-if="hasLoadedAllCollections" class="grey--text">
+        Nothing more to see here
+      </p>
       <image-fetch-button
+        v-else
         :loading="loadingCollections"
         :lazy="true"
         @fetch="loadMore"
@@ -26,7 +30,8 @@ export default {
     return {
       collections: [],
       loadingCollections: false,
-      collectionCount: 6
+      collectionCount: 6,
+      totalCollections: null
     }
   },
   computed: {
@@ -35,6 +40,9 @@ export default {
     },
     hasCollections() {
       return this.collections.length > 0
+    },
+    hasLoadedAllCollections() {
+      return this.totalCollections === this.collections.length
     }
   },
   watch: {
@@ -44,9 +52,11 @@ export default {
     }
   },
   async mounted() {
-    this.collections = await this.getCollectionsByKeyword({
+    const { collections, total } = await this.getCollectionsByKeyword({
       keyword: this.keyword
     })
+    this.totalCollections = total
+    this.collections = collections
   },
   methods: {
     async getCollectionsByKeyword({ keyword, page = 1, perPage }) {
@@ -55,16 +65,16 @@ export default {
         page,
         perPage
       })
-      return data
+      return { collections: data.results, total: data.total }
     },
     async loadMore({ page, perPage }) {
       this.loadingCollections = true
-      const newCollections = await this.getCollectionsByKeyword({
+      const { collections } = await this.getCollectionsByKeyword({
         page,
         perPage,
         keyword: this.keyword
       })
-      this.collections.push(...newCollections)
+      this.collections.push(...collections)
       this.loadingCollections = false
     }
   }
