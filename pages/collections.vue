@@ -15,6 +15,7 @@
         :loading="loadingCollections"
         :lazy="true"
         :per-page="collectionCount"
+        :scroll-threshold="1800"
         @fetch="loadMore"
       />
     </v-layout>
