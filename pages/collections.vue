@@ -22,18 +22,16 @@
 </template>
 
 <script>
+import mixinCollections from '~/mixins/mixinCollections'
+
 export default {
+  mixins: [mixinCollections],
   data() {
     return {
       collections: [],
       loadingCollections: false,
       imageCount: null, // Set to a number to have API fetch actual images attached to collections
       collectionCount: 6
-    }
-  },
-  computed: {
-    hasCollections() {
-      return this.collections.length > 0
     }
   },
   async mounted() {
@@ -43,14 +41,6 @@ export default {
     })
   },
   methods: {
-    async getCollections({ page = 1, perPage = 3, imageCount }) {
-      const { data } = await this.$api.getCollections({
-        page,
-        perPage,
-        imageCount
-      })
-      return data
-    },
     async loadMore({ page, perPage }) {
       this.loadingCollections = true
       const newCollections = await this.getCollections({

@@ -29,7 +29,9 @@
 </template>
 
 <script>
+import mixinImages from '~/mixins/mixinImages'
 export default {
+  mixins: [mixinImages],
   data() {
     return {
       collection: { user: {} },
@@ -45,9 +47,6 @@ export default {
     }
   },
   computed: {
-    hasImages() {
-      return this.images.length > 0
-    },
     hasLoadedAllImages() {
       return this.collection.total_photos === this.images.length
     }

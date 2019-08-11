@@ -14,7 +14,10 @@
 </template>
 
 <script>
+import mixinImages from '~/mixins/mixinImages'
+
 export default {
+  mixins: [mixinImages],
   data() {
     return {
       images: [],
@@ -27,9 +30,6 @@ export default {
     },
     pageTitle() {
       return this.orderBy.charAt(0).toUpperCase() + this.orderBy.slice(1)
-    },
-    hasImages() {
-      return this.images.length > 0
     }
   },
   watch: {
