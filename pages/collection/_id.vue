@@ -101,8 +101,10 @@ export default {
       this.breadcrumbs.push(previousRoute)
     },
     formatBreadcrumbName(name) {
-      if (name.includes('search-')) {
-        return name.split('-').join(' for ')
+      if (name.startsWith('search-')) {
+        const parts = name.split('-')
+        parts[0].concat(' for ')
+        return parts.join(' for ')
       }
       return name
     }
