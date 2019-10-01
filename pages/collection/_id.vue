@@ -1,7 +1,11 @@
 <template>
   <div>
     <v-layout align-center column>
-      <v-breadcrumbs :items="breadcrumbs" divider=">">
+      <v-breadcrumbs
+        v-if="cameFromAnotherRoute"
+        :items="breadcrumbs"
+        divider=">"
+      >
         <template v-slot:item="props">
           <v-breadcrumbs-item
             :to="props.item"
@@ -53,6 +57,9 @@ export default {
   computed: {
     hasLoadedAllImages() {
       return this.collection.total_photos === this.images.length
+    },
+    cameFromAnotherRoute() {
+      return this.breadcrumbs.length >= 2
     }
   },
   async mounted() {
@@ -98,7 +105,9 @@ export default {
     },
     setBreadcrumbs() {
       const previousRoute = this.$store.state.application.previousRoute
-      this.breadcrumbs.push(previousRoute)
+      if (previousRoute.path) {
+        this.breadcrumbs.push(previousRoute)
+      }
     },
     formatBreadcrumbName(name) {
       if (name.startsWith('search-')) {
