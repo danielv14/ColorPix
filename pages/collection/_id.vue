@@ -17,7 +17,7 @@
         {{ collection.total_photos }} images.
         <image-attribute-link :user="collection.user" />
       </span>
-      <span v-if="collection.description" class="grey--text">
+      <span v-if="collection.description" class="grey--text description">
         {{ collection.description }}
       </span>
     </v-layout>
@@ -111,3 +111,8 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.description
+  max-width: 800px
+  text-align: center
+</style>
