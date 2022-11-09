@@ -4,10 +4,6 @@
     {
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder"
-    },
-    {
-      "src": "server/routes/**/*.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
