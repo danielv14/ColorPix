@@ -6,7 +6,7 @@
       "use": "@nuxtjs/vercel-builder"
     },
     {
-      "src": "server/index.js",
+      "src": "server/routes/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -20,10 +20,6 @@
       }
     },
     { "src": "/api", "dest": "server/routes/index.js" },
-    { "src": "/api/(.*)", "dest": "server/routes/index.js" },
-    {
-      "src": "/api/image/random",
-      "dest": "server/controllers/imageRandom.controller.js"
-    }
+    { "src": "/api/(.*)", "dest": "server/routes/index.js" }
   ]
 }
