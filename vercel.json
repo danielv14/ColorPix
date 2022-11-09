@@ -19,6 +19,10 @@
         "Service-Worker-Allowed": "/"
       }
     },
-    { "src": "/api", "dest": "server/routes/index.js" }
+    { "src": "/api", "dest": "server/routes/index.js" },
+    {
+      "src": "/api/image/random",
+      "dest": "server/controllers/imageRandom.controller.js"
+    }
   ]
 }
