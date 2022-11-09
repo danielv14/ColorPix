@@ -14,6 +14,7 @@ require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
+  target: 'server',
 
   /*
    ** Headers of the page
