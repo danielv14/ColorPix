@@ -8,10 +8,6 @@
     {
       "src": "server/routes/**/*.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "server/routes/*.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
