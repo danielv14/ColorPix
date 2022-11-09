@@ -9,6 +9,10 @@ const {
 
 const router = express.Router()
 
+router.get('/healthcheck', (req, res) => {
+  res.json({ everythingIs: 'ok' })
+})
+
 router.get('/image/random', imageRandomController.getImageRandom)
 router.get('/images/search', imagesSearchController.getImagesByKeyword)
 router.get('/images/list', imageListController.getImageList)
