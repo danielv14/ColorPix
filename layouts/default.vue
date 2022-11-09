@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <core-navigation-drawer />
-    <v-content>
+    <v-main>
       <v-container fluid>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <core-footer />
   </v-app>
 </template>
