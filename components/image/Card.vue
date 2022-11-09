@@ -1,11 +1,7 @@
 <template>
   <v-hover v-slot:default="{ hover }">
     <v-fade-transition tag="v-card">
-      <v-card
-        v-show="hasImgLoaded"
-        :elevation="hover ? 16 : 0"
-        class="image-card"
-      >
+      <v-card :elevation="hover ? 16 : 0" class="image-card">
         <v-img
           :src="image.getImageRegular()"
           :max-height="imageHeight"
@@ -48,8 +44,8 @@
 
 <script>
 import {
-  getManipulationFromTypeAndThreshold,
-  getChangedHexValues
+  getChangedHexValues,
+  getManipulationFromTypeAndThreshold
 } from '@@/utils/colorManipulation'
 export default {
   props: {
